@@ -1,0 +1,71 @@
+name: Build, Test, and Publish Docker Images
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 1"
+  push:
+    branches: [ "main" ]
+    tags: ["*.*.*"]
+    paths-ignore: [".gitignore", ".github/workflows/update-versions.yml", ".github/workflows/docker-hub-description.yml", ".github/workflows/update-versions.py", ".github/workflows/requirements.txt", "*.md", "LICENSE", "docker-compose.yml", "test/*"]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Load .env file and set as environment variables
+        run: cat .env >> $GITHUB_ENV
+        
+      - name: Build (without pushing)
+        uses: docker/build-push-action@v5
+        with:  
+          tags: pleandre/dev-container:tests
+          build-args: |
+            DEBIAN_CODENAME=${{ env.DEBIAN_CODENAME }}
+          file: Dockerfile
+          context: .
+          push: false
+          load: true # Needed to load the image into the Docker environment
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Run tests
+        run: |
+          docker run --name tests-container -v $GITHUB_WORKSPACE/tests:/tests pleandre/dev-container:tests /tests/run-tests.sh
+          tests_exit_code=$?
+          docker rm tests-container
+          if [ $tests_exit_code -ne 0 ]; then
+            echo "Tests failed with exit code $tests_exit_code"
+            exit 1
+          fi
+      
+      - name: Push to Docker Hub (only if tests pass)
+        uses: docker/build-push-action@v5
+        with:  
+          tags: |
+            pleandre/dev-container:latest
+            pleandre/dev-container:${{ env.DEV_CONTAINER_VERSION }}
+          build-args: |
+            DEBIAN_CODENAME=${{ env.DEBIAN_CODENAME }}
+          file: Dockerfile
+          context: .
+          push: true
+          platforms: linux/amd64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

@@ -1,0 +1,52 @@
+name: Versions Update Bot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 0 * * *'
+  
+jobs:
+  update-versions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r .github/workflows/requirements.txt
+
+      - name: Run version update script
+        run: python .github/workflows/update-versions.py
+        continue-on-error: false
+
+      - name: Check for any uncommitted changes
+        id: changes_check
+        run: |
+          git status --porcelain
+          if [ $? -eq 0 ] && [ -z "$(git status --porcelain)" ]; then
+            echo "No changes detected."
+            echo "::set-output name=changes::false"
+          else
+            echo "Changes detected."
+            echo "::set-output name=changes::true"
+          fi
+
+      - name: Create Pull Request
+        if: steps.changes_check.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: Update dependencies
+          title: 'Automated Dependency Updates'
+          body: 'This is an auto-generated PR with dependency updates.'
+          branch: 'updates/dependency-updates'
+          delete-branch: true
+          labels: 'dependencies,automated pr'
