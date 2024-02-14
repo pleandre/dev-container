@@ -45,7 +45,7 @@ jobs:
         if: env.CHANGES_DETECTED == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.SERVICE_ACCOUNT_GITHUB_TOKEN }}
           commit-message: Update dependencies
           title: 'Automated Dependency Updates'
           body: 'This is an auto-generated PR with dependency updates.'
