@@ -20,6 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@main
+      
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -29,8 +33,11 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
       
-      - name: Load .env file and set as environment variables
-        run: cat .env >> $GITHUB_ENV
+      - name: Load .env file and set environment variables required
+        run: |
+            source .env
+            echo "DEBIAN_CODENAME=$DEBIAN_CODENAME" >> $GITHUB_ENV
+            echo "DEV_CONTAINER_USER=$DEV_CONTAINER_USER" >> $GITHUB_ENV
         
       - name: Build
         uses: docker/build-push-action@v5
@@ -49,7 +56,7 @@ jobs:
 
       - name: Run tests
         run: |
-          docker run --name tests-container -v $GITHUB_WORKSPACE/tests:/tests pleandre/dev-container:tests-${{ github.sha }} /tests/run-tests.sh
+          docker run --name tests-container -e "DEV_CONTAINER_USER=$DEV_CONTAINER_USER" -v $GITHUB_WORKSPACE/tests:/tests pleandre/dev-container:tests-${{ github.sha }} /tests/run-tests.sh
           tests_exit_code=$?
           docker rm tests-container
           if [ $tests_exit_code -ne 0 ]; then
@@ -59,7 +66,11 @@ jobs:
           
       - name: Automatically merge Dependabot PRs
         uses: pascalgn/automerge-action@v0.16.2
-        if: github.actor == 'dependabot[bot]' || github.actor == 'github-actions[bot]'
-        with:
-          mergeMethod: squash
-          token: ${{ secrets.GITHUB_TOKEN }}
+        if: github.actor == 'pleandre-service-account' || github.actor == 'dependabot[bot]' || github.actor == 'github-actions[bot]'
+        env:
+          MERGE_METHOD: squash
+          MERGE_FILTER_AUTHOR: pleandre-service-account
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: ""
+          MERGE_FORKS: "false"
+          

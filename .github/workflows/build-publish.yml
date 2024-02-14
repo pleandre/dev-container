@@ -24,6 +24,10 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+
+      - name: Free disk space
+        uses: jlumbroso/free-disk-space@main
+      
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -46,8 +50,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       
-      - name: Load .env file and set as environment variables
-        run: cat .env >> $GITHUB_ENV
+      - name: Load .env file and set environment variables required
+        run: |
+            source .env
+            echo "DEBIAN_CODENAME=$DEBIAN_CODENAME" >> $GITHUB_ENV
+            echo "DEV_CONTAINER_USER=$DEV_CONTAINER_USER" >> $GITHUB_ENV
+            echo "DEV_CONTAINER_VERSION=$DEV_CONTAINER_VERSION" >> $GITHUB_ENV
         
       - name: Build (without pushing)
         uses: docker/build-push-action@v5
