@@ -1,6 +1,7 @@
 from dotenv import load_dotenv 
 from bs4 import BeautifulSoup
 from packaging import version
+import subprocess
 import sys
 import os
 import requests
@@ -9,11 +10,15 @@ import re
 load_dotenv()
 error_info = []
 
+
 # Debian
 try:
     debian_stable_release = requests.get('https://deb.debian.org/debian/dists/stable/Release').text
     debian_codename = re.search(r'Codename: (\w+)', debian_stable_release).group(1)
     debian_version = re.search(r"Version: (\d+)", debian_stable_release).group(1)
+    
+    print(f"Retrieved Debian codename successfully: {debian_codename}")
+    print(f"Retrieved Debian version successfully: {debian_version}")
 except Exception as e:
     error_info.append(("Debian", e))
     debian_codename = os.getenv('DEBIAN_CODENAME')
@@ -24,6 +29,8 @@ try:
     dotnet_packages = requests.get(f"https://packages.microsoft.com/debian/{debian_version}/prod/dists/{debian_codename}/main/binary-amd64/Packages").text
     dotnet_sdk_versions = sorted(re.findall(r'Package: dotnet-sdk-(\d+\.\d+)', dotnet_packages), key=lambda v: version.parse(v), reverse=True)
     dotnet_version = dotnet_sdk_versions[0]
+    
+    print(f"Retrieved Dotnet SDK version successfully: {dotnet_version}")
 except Exception as e:
     error_info.append(("Dotnet", e))
     dotnet_version = os.getenv('DOTNET_VERSION')
@@ -33,15 +40,28 @@ try:
     rust_stable_channel = requests.get(f"https://static.rust-lang.org/dist/channel-rust-stable.toml").text
     rust_versions = re.findall(r'version = "(.*?) \(', rust_stable_channel)
     rust_version = max(rust_versions, key=version.parse)
+    
+    print(f"Retrieved Rust stable version successfully: {rust_version}")
 except Exception as e:
     error_info.append(("Rust", e))
     rust_version = os.getenv('RUST_VERSION')
+
+# NVM Version
+try:
+    nvm_version = requests.get("https://api.github.com/repos/nvm-sh/nvm/releases/latest").json()['tag_name']
+    
+    print(f"Retrieved Nvm version successfully: {nvm_version}")
+except Exception as e:
+    error_info.append(("Nvm", e))
+    nvm_version = os.getenv('NVM_VERSION')
 
 # Node LTS
 try:
     node_releases = response = requests.get("https://nodejs.org/dist/index.json").json()
     node_lts_releases = [release['version'].lstrip('v') for release in node_releases if release.get('lts') != False]
     node_version = max(node_lts_releases, key=lambda release: version.parse(release))
+    
+    print(f"Retrieved Node LTS version successfully: {node_version}")
 except Exception as e:
     error_info.append(("Node", e))
     node_version = os.getenv('NODE_VERSION')
@@ -58,10 +78,29 @@ try:
     jdk_dowload_link = jdk_download_page.find(lambda tag: tag.name == "a" and tag['href'] is not None and processor_type in tag['href'])['href']
     jdk_download_url = jdk_dowload_link if jdk_dowload_link.startswith('http') else f"https://jdk.java.net/{(jdk_dowload_link.lstrip('/'))}"
     jdk_version = re.search(r"jdk-(\d+\.\d+\.\d+)", jdk_download_url).group(1)
+    
+    print(f"Retrieved Java JDK version successfully: {jdk_version}")
+    print(f"Retrieved Java JDK download URL successfully: {jdk_download_url}")
 except Exception as e:
     error_info.append(("Java JDK", e))
     jdk_version = os.getenv('JDK_VERSION')
     jdk_download_url = os.getenv('JDK_DOWNLOAD_URL')
+
+# Maven
+try:
+    download_type = '-bin.tar.gz'
+    
+    maven_download_page = BeautifulSoup(requests.get("https://maven.apache.org/download.cgi").text, 'html.parser')
+    maven_download_link = maven_download_page.find(lambda tag: tag.name == "a" and download_type in tag.text)['href']
+    maven_download_url = maven_download_link if maven_download_link.startswith('http') else f"https://maven.apache.org/{(maven_download_link.lstrip('/'))}"
+    maven_version = re.search(r"apache-maven-(\d+\.\d+\.\d+)", maven_download_url).group(1)
+    
+    print(f"Retrieved Maven version successfully: {maven_version}")
+    print(f"Retrieved Maven download URL successfully: {maven_download_url}")
+except Exception as e:
+    error_info.append(("Maven", e))
+    maven_version = os.getenv('MAVEN_VERSION')
+    maven_download_url = os.getenv('MAVEN_DOWNLOAD_URL')
 
 # Go
 try:
@@ -70,6 +109,9 @@ try:
     go_download_link = go_download_page.find(lambda tag: tag.name == "a" and tag['href'] is not None and processor_type in tag['href'])['href']
     go_download_url = go_download_link if go_download_link.startswith('http') else f"https://go.dev/dl/{(go_download_link.lstrip('/'))}"
     go_version = re.search(r"go(\d+\.\d+\.\d+)", go_download_url).group(1)
+    
+    print(f"Retrieved Go version successfully: {go_version}")
+    print(f"Retrieved Go download URL successfully: {go_download_url}")
 except Exception as e:
     error_info.append(("Go", e))
     go_version = os.getenv('GO_VERSION')
@@ -77,16 +119,23 @@ except Exception as e:
 
 # Conan
 try:
-    conan_version = requests.get("https://api.github.com/repos/conan-io/conan/releases/latest").json()['tag_name']
+    conan_release = requests.get("https://api.github.com/repos/conan-io/conan/releases/latest").json()
+    conan_version = conan_release['tag_name']
+    conan_version_url = [asset['browser_download_url'] for asset in conan_release['assets'] if asset['browser_download_url'].endswith('.deb')][0]
+    
+    print(f"Retrieved Conan version successfully: {conan_version}")
 except Exception as e:
     error_info.append(("Conan", e))
     conan_version = os.getenv('CONAN_VERSION')
+    conan_version_url = os.getenv('CONAN_VERSION_URL')
     
 # PHP
 try:
     php_packages = requests.get(f"https://packages.sury.org/php/dists/{debian_codename}/main/binary-amd64/Packages").text
     php_packages_versions = sorted(re.findall(r'Package: php(\d+\.\d+)', php_packages), key=lambda v: version.parse(v), reverse=True)
     php_version = php_packages_versions[0]
+    
+    print(f"Retrieved PHP version successfully: {php_version}")
 except Exception as e:
     error_info.append(("Php", e))
     php_version = os.getenv('PHP_VERSION')
@@ -96,6 +145,8 @@ try:
     nginx_packages = requests.get(f"https://nginx.org/packages/debian/dists/{debian_codename}/nginx/binary-amd64/Packages").text
     nginx_packages_versions = sorted(re.findall(r'Package: nginx\nVersion: (\d+\.\d+.\d+)', nginx_packages), key=lambda v: version.parse(v), reverse=True)
     nginx_version = nginx_packages_versions[0]
+    
+    print(f"Retrieved Nginx version successfully: {nginx_version}")
 except Exception as e:
     error_info.append(("Nginx", e))
     nginx_version = os.getenv('NGINX_VERSION')    
@@ -103,22 +154,69 @@ except Exception as e:
 # Code Server
 try:
     code_server_version = requests.get("https://api.github.com/repos/coder/code-server/releases/latest").json()['tag_name'].lstrip('v')
+    
+    print(f"Retrieved Code Server version successfully: {code_server_version}")
 except Exception as e:
     error_info.append(("Code Server", e))
     code_server_version = os.getenv('CODE_SERVER_VERSION')
 
 # Python
 try:
-    python_download_page_links = BeautifulSoup(requests.get("https://www.python.org/downloads/").text, 'html.parser')
-    python_version_pattern = re.compile("Download Python (\d+\.\d+(?:\.\d+)?)")
-    python_download_page_link = python_download_page_links.find(lambda tag: tag.name == "a" and python_version_pattern.search(tag.text) is not None)
-    python_version = python_version_pattern.search(python_download_page_link.text).group(1)
+    python_versions = [pkg_info['version'] for pkg_info in requests.get('https://repo.anaconda.com/pkgs/main/linux-64/repodata.json').json()['packages'].values() if pkg_info['name'] == 'python']
+    python_version = max(python_versions, key=version.parse)
+
+    print(f"Retrieved Python version successfully: {python_version}")
 except Exception as e:
     error_info.append(("Python", e))
     python_version = os.getenv('PYTHON_VERSION')
 
+# JupyterLab
+jupyter_lab_requirements_changed = False
+try:
+    requirements_in = "./scripts/tools/jupyter-lab/requirements-conda-dev.in"
+    requirements_out = "./scripts/tools/jupyter-lab/requirements-conda-dev.txt"
+    
+    try:
+        with open(requirements_out, 'r') as file:
+            original_contents = file.read()
+    except:
+        original_contents = None
+    
+    subprocess.run(["pip-compile", requirements_in, "--output-file", requirements_out], check=True)
+
+    with open(requirements_out, 'r') as file:
+        new_contents = file.read()
+        
+    jupyter_lab_requirements_changed = original_contents == new_contents
+
+    print(f"Updated jupyter-lab requirements successfully (changed = {jupyter_lab_requirements_changed}).")
+except Exception as e:
+    error_info.append(("JupyterLab", e))
+    
+# Gophernote Jupyter Kernel Version
+try:
+    gophernote_version = requests.get("https://api.github.com/repos/gopherdata/gophernotes/releases/latest").json()['tag_name']
+    
+    print(f"Retrieved Gophernote Jupyter Kernel version successfully: {gophernote_version}")
+except Exception as e:
+    error_info.append(("Gophernote Jupyter Kernel", e))
+    gophernote_version = os.getenv('GOPHERNOTE_JUPYTER_KERNEL_VERSION')
+    
+# IJava Jupyter Kernel Version
+try:
+    ijava_release = requests.get("https://api.github.com/repos/SpencerPark/IJava/releases/latest").json()
+    ijava_version = ijava_release['tag_name']
+    ijava_download_url = [asset['browser_download_url'] for asset in ijava_release['assets'] if (asset['browser_download_url'] is not None and asset['browser_download_url'].endswith('.zip') and 'ijava' in asset['browser_download_url'])][0]
+    
+    print(f"Retrieved IJava Jupyter Kernel download URL successfully: {ijava_download_url}")
+except Exception as e:
+    error_info.append(("IJava Jupyter Kernel", e))
+    ijava_download_url = os.getenv('IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL')
+    
+
 # Dev Container Version
 dev_container_version = version.parse(os.getenv('DEV_CONTAINER_VERSION').split('-')[1] if os.getenv('DEV_CONTAINER_VERSION') else "1.0")
+print(f"Current dev container version: {dev_container_version}")
 
 versions_to_check = [
     ('DEBIAN_VERSION', debian_version, 'major'),
@@ -134,10 +232,14 @@ versions_to_check = [
     ('PYTHON_VERSION', python_version, 'minor'),
 ]
 
+bump_version = jupyter_lab_requirements_changed
+
+if jupyter_lab_requirements_changed:
+    print(f"Jupyter Lab Requirements version bump")
+
 for v in versions_to_check:
     old_version = version.parse(os.getenv(v[0]) if os.getenv(v[0]) else "0.0.0")
     new_version = version.parse(str(v[1]))
-    bump_version = False
     
     if new_version < old_version:
         print(f"Error, new version for {v[0]} is older than the current version we have ({new_version} < {old_version})");
@@ -147,9 +249,11 @@ for v in versions_to_check:
         continue
     
     if v[2] == 'major' and new_version.major > old_version.major:
+        print(f"{v[0]} version bump")
         bump_version = True
     
     if v[2] == 'minor' and (new_version.major > old_version.major or new_version.minor > old_version.minor):
+        print(f"{v[0]} version bump")
         bump_version = True
 
 if bump_version:
@@ -157,25 +261,33 @@ if bump_version:
     minor = dev_container_version.minor + 1
     dev_container_version = f"{major}.{minor}"
     print(f"Version bumped: {dev_container_version} -> {major}.{minor}")
+    print(f"New dev container version: {dev_container_version}")
 
 # Result
-versions = f"""DEV_CONTAINER_VERSION={debian_codename}-{dev_container_version}
-DEV_CONTAINER_USER={os.getenv('DEV_CONTAINER_USER')}
-DEV_CONTAINER_USER_GROUP={os.getenv('DEV_CONTAINER_USER_GROUP')}
-DEBIAN_CODENAME={debian_codename}
-DEBIAN_VERSION={debian_version}
-DOTNET_VERSION={dotnet_version}
-RUST_VERSION={rust_version}
-NODE_VERSION={node_version}
-JDK_VERSION={jdk_version}
-JDK_DOWNLOAD_URL={jdk_download_url}
-GO_VERSION={go_version}
-GO_DOWNLOAD_URL={go_download_url}
-CONAN_VERSION={conan_version}
-PHP_VERSION={php_version}
-NGINX_VERSION={nginx_version}
-CODE_SERVER_VERSION={code_server_version}
-PYTHON_VERSION={python_version}
+versions = f"""export DEV_CONTAINER_VERSION={debian_codename}-{dev_container_version}
+export DEV_CONTAINER_USER={os.getenv('DEV_CONTAINER_USER')}
+export DEV_CONTAINER_USER_GROUP={os.getenv('DEV_CONTAINER_USER_GROUP')}
+export DEBIAN_CODENAME={debian_codename}
+export DEBIAN_VERSION={debian_version}
+export DOTNET_VERSION={dotnet_version}
+export RUST_VERSION={rust_version}
+export NVM_VERSION={nvm_version}
+export NODE_VERSION={node_version}
+export JDK_VERSION={jdk_version}
+export JDK_DOWNLOAD_URL={jdk_download_url}
+export MAVEN_VERSION={maven_version}
+export MAVEN_DOWNLOAD_URL={maven_download_url}
+export GO_VERSION={go_version}
+export GO_DOWNLOAD_URL={go_download_url}
+export CONAN_VERSION={conan_version}
+export CONAN_DOWNLOAD_URL={conan_version_url}
+export PHP_VERSION={php_version}
+export NGINX_VERSION={nginx_version}
+export CODE_SERVER_VERSION={code_server_version}
+export CONDA_ENV={os.getenv('CONDA_ENV')}
+export PYTHON_VERSION={python_version}
+export GOPHERNOTE_JUPYTER_KERNEL_VERSION={gophernote_version}
+export IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL={ijava_download_url}
 """
 
 # Write dotenv file
