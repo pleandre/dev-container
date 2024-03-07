@@ -46,7 +46,6 @@ echo ">> Add Jupyter C# support"
 echo "export DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=1
 export DOTNET_INTERACTIVE_SKIP_FIRST_TIME_EXPERIENCE=true" > /etc/profile.d/dotnet-interactive-env.sh
 su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.miniconda3/bin/activate ${CONDA_ENV} && dotnet tool install --global Microsoft.dotnet-interactive && dotnet interactive jupyter install"
-dotnet workload update
 
 # Add Ansible support: https://github.com/ansible/ansible-jupyter-kernel
 echo ">> Add Jupyter Ansible support"
