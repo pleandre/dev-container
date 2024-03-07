@@ -171,25 +171,39 @@ except Exception as e:
     python_version = os.getenv('PYTHON_VERSION')
 
 # JupyterLab
+def clean_requirements(text):
+    # Used to check if requirements.txt changed
+    # Remove all lines containing a sharp symbol
+    lines = text.split('\n')
+    lines_without_sharp = [line for line in lines if '#' not in line]
+    
+    # Join the remaining lines back together with newline characters
+    text_without_sharp = '\n'.join(lines_without_sharp)
+    
+    # Remove all spaces and unwanted characters, but leave '==', alphanumeric characters, and newlines
+    text_cleaned = re.sub(r'(?m)[^\w\n=]+', '', text_without_sharp)
+    
+    return text_cleaned
+
 jupyter_lab_requirements_changed = False
 try:
     requirements_in = "./scripts/tools/jupyter-lab/requirements-conda-dev.in"
     requirements_out = "./scripts/tools/jupyter-lab/requirements-conda-dev.txt"
     
-    try:
-        with open(requirements_out, 'r') as file:
-            original_contents = file.read()
-    except:
-        original_contents = None
+    with open(requirements_out, 'r') as file:
+        original_content = clean_requirements(file.read())
     
     subprocess.run(["pip-compile", requirements_in, "--output-file", requirements_out], check=True)
 
     with open(requirements_out, 'r') as file:
-        new_contents = file.read()
-        
-    jupyter_lab_requirements_changed = original_contents == new_contents
+        new_content = clean_requirements(file.read())
+    
+    jupyter_lab_requirements_changed = original_content == new_content
 
     print(f"Updated jupyter-lab requirements successfully (changed = {jupyter_lab_requirements_changed}).")
+    
+    if jupyter_lab_requirements_changed:
+        print(f"Old requirements:\n{original_content}\n\n\n\nNew Requirements {new_content}")
 except Exception as e:
     error_info.append(("JupyterLab", e))
     
