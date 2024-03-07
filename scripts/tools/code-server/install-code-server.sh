@@ -9,6 +9,7 @@ echo ">> Copying code-server environment variables and startup scripts"
 mkdir -p /opt/dev-container/code-server/
 cp /scripts/tools/code-server/opt/* /opt/dev-container/code-server/
 cp /scripts/tools/code-server/code-server-env.sh /etc/profile.d/code-server-env.sh
+touch /opt/dev-container/code-server/installed-extensions.txt
 source /etc/profile
 
 echo ">> Installing code-server"
@@ -28,6 +29,11 @@ stdout_logfile_maxbytes=0
 redirect_stderr=true
 
 " >> /etc/supervisor/conf.d/supervisord.conf
+
+# Set access
+mkdir -p /home/${DEV_CONTAINER_USER}/.local/share/code-server
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /home/${DEV_CONTAINER_USER}/.local/share/code-server
+sudo chmod -R 777 /home/${DEV_CONTAINER_USER}/.local/share/code-server
 
 # Display install size
 echo "- Installation completed: code server"

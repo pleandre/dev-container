@@ -41,13 +41,6 @@ redirect_stderr=true
 
 " >> /etc/supervisor/conf.d/supervisord.conf
 
-# Add C# Support: https://github.com/dotnet/interactive/
-echo ">> Add Jupyter C# support"
-echo "export DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=1
-export DOTNET_INTERACTIVE_SKIP_FIRST_TIME_EXPERIENCE=true" > /etc/profile.d/dotnet-interactive-env.sh
-su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.miniconda3/bin/activate ${CONDA_ENV} && dotnet tool install --global Microsoft.dotnet-interactive && dotnet interactive jupyter install"
-dotnet workload update
-
 # Add Ansible support: https://github.com/ansible/ansible-jupyter-kernel
 echo ">> Add Jupyter Ansible support"
 su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate ${CONDA_ENV} && pip install ansible-kernel && python -m ansible_kernel.install"
@@ -71,6 +64,13 @@ su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.minicon
 # Add Go support: https://github.com/gopherdata/gophernotes
 echo ">> Add Jupyter Go support"
 su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.miniconda3/bin/activate ${CONDA_ENV} && go install github.com/gopherdata/gophernotes@${GOPHERNOTE_JUPYTER_KERNEL_VERSION} && mkdir -p ~/.local/share/jupyter/kernels/gophernotes && cp \${GOPATH}/pkg/mod/github.com/gopherdata/gophernotes@${GOPHERNOTE_JUPYTER_KERNEL_VERSION}/kernel/* ~/.local/share/jupyter/kernels/gophernotes && chmod +w ~/.local/share/jupyter/kernels/gophernotes/kernel.json && sed \"s|gophernotes|\${GOPATH}bin/gophernotes|\" < ~/.local/share/jupyter/kernels/gophernotes/kernel.json.in > ~/.local/share/jupyter/kernels/gophernotes/kernel.json"
+
+# Add C# Support: https://github.com/dotnet/interactive/
+echo ">> Add Jupyter C# support"
+echo "export DOTNET_INTERACTIVE_CLI_TELEMETRY_OPTOUT=1
+export DOTNET_INTERACTIVE_SKIP_FIRST_TIME_EXPERIENCE=true" > /etc/profile.d/dotnet-interactive-env.sh
+su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.miniconda3/bin/activate ${CONDA_ENV} && export PATH=\"\$PATH:~/.dotnet/tools\" && dotnet tool install --global Microsoft.dotnet-interactive && dotnet interactive jupyter install"
+dotnet workload update
 
 # Display install size
 echo "- Installation completed: JupyterLab"
