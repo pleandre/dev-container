@@ -38,3 +38,8 @@ apt update -qq
 # Clean after installs
 apt clean
 rm -rf /var/lib/apt/lists/*
+
+# Set chown and chmod for home folder
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /home/${DEV_CONTAINER_USER}
+find /home/${DEV_CONTAINER_USER} -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
+find /home/${DEV_CONTAINER_USER} -type f -exec chmod u+rw,g+rw,o+r '{}' \;

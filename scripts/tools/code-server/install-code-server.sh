@@ -32,8 +32,12 @@ redirect_stderr=true
 
 # Set access
 mkdir -p /home/${DEV_CONTAINER_USER}/.local/share/code-server
-sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /home/${DEV_CONTAINER_USER}/.local/share/code-server
-sudo chmod -R 777 /home/${DEV_CONTAINER_USER}/.local/share/code-server
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /home/${DEV_CONTAINER_USER}/.local
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /opt/dev-container/
+find /home/${DEV_CONTAINER_USER}/.local/share/code-server -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
+find /home/${DEV_CONTAINER_USER}/.local/share/code-server -type f -exec chmod u+rw,g+rw,o+r '{}' \;
+find /opt/dev-container/ -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
+find /opt/dev-container/ -type f -exec chmod u+rw,g+rw,o+r '{}' \;
 
 # Display install size
 echo "- Installation completed: code server"
