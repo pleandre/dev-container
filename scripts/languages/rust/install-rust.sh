@@ -24,6 +24,10 @@ echo ">> Running Rust Install"
 rm -rf /tmp/rust-${RUST_VERSION}-x86_64-unknown-linux-gnu/
 rm -rf /tmp/rust-install.tar.gz
 
+# Setup Environment Variables
+echo ">> Copy Rust environment variables"
+cp /scripts/languages/rust/rust-env.sh /etc/profile.d/rust-env.sh
+
 # Display install size
 echo "- Installation completed: Rust"
 echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"

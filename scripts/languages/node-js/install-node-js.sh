@@ -19,6 +19,9 @@ su -l $DEV_CONTAINER_USER /bin/bash -c ". ~/.nvm/nvm.sh && nvm use ${NODE_VERSIO
 echo ">> Enable Corepack"
 su -l $DEV_CONTAINER_USER /bin/bash -c ". ~/.nvm/nvm.sh && corepack enable"
 
+# Setup Environment Variables
+echo ">> Copy Node environment variables"
+cp /scripts/languages/node-js/node-env.sh /etc/profile.d/node-env.sh
 
 # Display install size
 echo "- Installation completed: NVM, Node, Corepack"

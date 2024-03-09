@@ -16,6 +16,14 @@ echo ">> Creating Conda environment with Python version"
 su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate base && conda create -n ${CONDA_ENV} python=${PYTHON_VERSION} -y"
 su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate ${CONDA_ENV} && conda install -n ${CONDA_ENV} pip -y"
 
+# Activate this environment by default
+echo ">> Setup conda default environment"
+echo "if [ -f ~/.miniconda3/bin/activate ]; then
+	source ~/.miniconda3/bin/activate ${CONDA_ENV}
+fi" > /etc/profile.d/conda-env.sh
+
+chmod +x /etc/profile.d/conda-env.sh
+
 # Install pip-tools
 echo ">> Install pip-tools"
 su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate ${CONDA_ENV} && pip install pip-tools"

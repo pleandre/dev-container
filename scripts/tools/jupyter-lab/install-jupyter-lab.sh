@@ -82,6 +82,10 @@ export DOTNET_INTERACTIVE_SKIP_FIRST_TIME_EXPERIENCE=true" > /etc/profile.d/dotn
 su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.miniconda3/bin/activate ${CONDA_ENV} && dotnet tool install --global Microsoft.dotnet-interactive && dotnet interactive jupyter install"
 dotnet workload update
 
+# Add Rust Support
+echo ">> Add Rust support"
+su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.miniconda3/bin/activate ${CONDA_ENV} && cargo install --locked evcxr_jupyter && evcxr_jupyter --install"
+
 # Display install size
 echo "- Installation completed: JupyterLab"
 echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"

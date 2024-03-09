@@ -68,6 +68,8 @@ The `dev-container` is equipped with a comprehensive suite of development, cloud
 - [Debian](https://www.debian.org/) (Operating System Base)
 - [NVM](https://github.com/nvm-sh/nvm) (Node Version Manager)
 - [Maven](https://maven.apache.org/) (Java Package Manager)
+- [Gradle](https://gradle.org/) (Java Package Manager)
+- [SdkMan](https://sdkman.io/) (SDK Man for Java development)
 - [Conan](https://conan.io/) (C/C++ Package Manager)
 - [Composer](https://getcomposer.org/) (Php Dependency Manager)
 - [Vcpkg](https://github.com/microsoft/vcpkg) (C/C++ Package Manager)

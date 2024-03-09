@@ -18,7 +18,6 @@ jupyterlab
 jupyterlab-lsp
 jupyterlab-git
 jupyter_scheduler
-jupysql
 keras
 boto3
 python-lsp-server[all]
