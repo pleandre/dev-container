@@ -15,4 +15,4 @@ export JUPYTERLAB_EXTRA_ARGS=${JUPYTERLAB_EXTRA_ARGS:---log-level='WARN'}
 
 # Script ends and is replaced by jupyterlab process from dev conda environment (exec).
 cd $JUPYTERLAB_PROJECTS_DIRECTORIES
-exec /home/dev-user/.miniconda3/envs/dev/bin/jupyter-lab --ip 0.0.0.0 --ServerApp.token=$JUPYTERLAB_TOKEN --ServerApp.password=$JUPYTERLAB_PASSWORD --port $JUPYTERLAB_PORT --no-browser $JUPYTERLAB_EXTRA_ARGS
+exec /home/dev-user/.miniconda3/envs/dev/bin/jupyter-lab --ip 0.0.0.0 --IdentityProvider.token=$JUPYTERLAB_TOKEN --ServerApp.password=$JUPYTERLAB_PASSWORD --port $JUPYTERLAB_PORT --no-browser $JUPYTERLAB_EXTRA_ARGS

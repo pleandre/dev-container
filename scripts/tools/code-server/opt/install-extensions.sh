@@ -2,7 +2,7 @@
 
 # Load extensions if not loaded
 EXTENSIONS="/opt/dev-container/code-server/extensions.json"
-INSTALLED_EXTENSIONS="/opt/dev-container/code-server/installed-extensions.txt"
+INSTALLED_EXTENSIONS="/opt/dev-container/code-server/data/installed-extensions.txt"
 
 # Ensure installed extensions file exists
 touch "$INSTALLED_EXTENSIONS" &>/dev/null

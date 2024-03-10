@@ -9,8 +9,12 @@ echo ">> Copying code-server environment variables and startup scripts"
 mkdir -p /opt/dev-container/code-server/
 cp /scripts/tools/code-server/opt/* /opt/dev-container/code-server/
 cp /scripts/tools/code-server/code-server-env.sh /etc/profile.d/code-server-env.sh
-touch /opt/dev-container/code-server/installed-extensions.txt
+
+mkdir -p /opt/dev-container/code-server/data/
+touch /opt/dev-container/code-server/data/installed-extensions.txt
 source /etc/profile
+
+mkdir -p /home/${DEV_CONTAINER_USER}/projects
 
 echo ">> Installing code-server"
 curl -fsSL https://code-server.dev/install.sh | sh -s -- --version $CODE_SERVER_VERSION
@@ -20,7 +24,7 @@ echo ">> Creating code-server service config"
 echo "[program:code-server]
 environment=HOME=\"/home/${DEV_CONTAINER_USER}\"
 command=bash -c '/opt/dev-container/code-server/code-server-start.sh'
-directory=/home/${DEV_CONTAINER_USER}/
+directory=/home/${DEV_CONTAINER_USER}/projects
 user=${DEV_CONTAINER_USER}
 autostart=true
 autorestart=true
@@ -38,6 +42,9 @@ find /home/${DEV_CONTAINER_USER}/.local/share/code-server -type d -exec chmod u+
 find /home/${DEV_CONTAINER_USER}/.local/share/code-server -type f -exec chmod u+rw,g+rw,o+r '{}' \;
 find /opt/dev-container/ -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
 find /opt/dev-container/ -type f -exec chmod u+rw,g+rw,o+r '{}' \;
+
+# Disable git safe directory check (to be able to mount git repos from host)
+git config --global --add safe.directory '*'
 
 # Display install size
 echo "- Installation completed: code server"
