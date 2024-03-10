@@ -1,5 +1,5 @@
 # Path to the JSON file, this file can be changed
-JSON_FILE_PATH="/opt/code-server/marketplace.json"
+JSON_FILE_PATH="/opt/dev-container/code-server/marketplace.json"
 
 # Check if the JSON file exists
 if [ -f "$JSON_FILE_PATH" ]; then
