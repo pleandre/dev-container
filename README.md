@@ -32,10 +32,13 @@ services:
       - "81:81"      # Port for Nginx / PHP
       - "80:80"      # Port for APIs
       - "8888:8888"  # Port for Jupyter
-    volumes:
-      - "./data/.config:/home/dev-user/.config"  # Code-server configuration
-      - "./data/extensions:/home/dev-user/.local/share/code-server/extensions"  # Code-server extensions
-      - "/var/run/docker.sock:/var/run/docker.sock"  # Docker socket for Docker commands within the container
+#    volumes:
+#      - "/var/run/docker.sock:/var/run/docker.sock"  # Optional, Socket for Docker, if you want to have access to your host docker within the dev container
+#      - "./settings/code-server-vscode-marketplace.json:/opt/dev-container/code-server/marketplace.json" # Optional, code server extension market place settings
+#      - "./settings/extensions.json:/opt/dev-container/code-server/extensions.json" # Optional, to install extensions at startup
+#      - "./www:/usr/share/nginx/www" # Optional, php server root directory
+#      - "./projects:/home/dev-user/projects/" # Optional, projects directory
+#      - "./jupyter:/home/dev-user/jupyter/" # Optional, jupyter directory
 ```  
 
 You can also mount your Git repository or other folders.  

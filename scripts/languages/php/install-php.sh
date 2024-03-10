@@ -104,8 +104,12 @@ php -r "unlink('composer-setup.php');"
 
 mv composer.phar /usr/local/bin/composer
 
-# Create link in home directory to www folder
-ln -s /home/dev-user/www /usr/share/nginx/www
+# Create link in home directory to www folder and set access
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /usr/share/nginx/www
+find /usr/share/nginx/www -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
+find /usr/share/nginx/www -type f -exec chmod u+rw,g+rw,o+r '{}' \;
+su -l $DEV_CONTAINER_USER /bin/bash -c "ln -s /usr/share/nginx/www /home/${DEV_CONTAINER_USER}/www"
+
 
 # Setup services
 echo ">> Create PHP-FPM and Nginx services"
