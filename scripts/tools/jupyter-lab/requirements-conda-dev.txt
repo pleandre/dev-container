@@ -40,8 +40,6 @@ autopep8==2.0.4
     # via python-lsp-server
 babel==2.14.0
     # via jupyterlab-server
-backoff==2.2.1
-    # via posthog
 beautifulsoup4==4.12.3
     # via nbconvert
 black==24.2.0
@@ -240,8 +238,6 @@ mistune==3.0.2
     # via nbconvert
 ml-dtypes==0.3.2
     # via keras
-monotonic==1.6
-    # via posthog
 multidict==6.0.5
     # via
     #   aiohttp
@@ -317,8 +313,6 @@ platformdirs==4.2.0
     #   yapf
 pluggy==1.4.0
     # via python-lsp-server
-posthog==3.4.2
-    # via ploomber-core
 prometheus-client==0.20.0
     # via jupyter-server
 prompt-toolkit==3.0.43
@@ -373,7 +367,6 @@ python-dateutil==2.8.2
     #   jupyter-client
     #   matplotlib
     #   pandas
-    #   posthog
 python-dotenv==1.0.1
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 python-json-logger==2.0.7
@@ -389,9 +382,7 @@ pytz==2023.3
     #   jupyter-scheduler
     #   pandas
 pyyaml==6.0.1
-    # via
-    #   jupyter-events
-    #   ploomber-core
+    # via jupyter-events
 pyzmq==25.1.2
     # via
     #   ipykernel
@@ -409,7 +400,6 @@ requests==2.31.0
     #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
     #   jupyterlab-server
     #   nbdime
-    #   posthog
 rfc3339-validator==0.1.4
     # via
     #   jsonschema
@@ -440,7 +430,6 @@ six==1.16.0
     # via
     #   asttokens
     #   bleach
-    #   posthog
     #   python-dateutil
     #   rfc3339-validator
 smmap==5.0.1
@@ -454,8 +443,7 @@ snowballstemmer==2.2.0
 soupsieve==2.5
     # via beautifulsoup4
 sqlalchemy==1.4.51
-    # via
-    #   jupyter-scheduler
+    # via jupyter-scheduler
 stack-data==0.6.3
     # via ipython
 starlette==0.36.3
@@ -516,9 +504,7 @@ urllib3==2.0.7
     #   botocore
     #   requests
 wcwidth==0.2.13
-    # via
-    #   prettytable
-    #   prompt-toolkit
+    # via prompt-toolkit
 webcolors==1.13
     # via jsonschema
 webencodings==0.5.1
