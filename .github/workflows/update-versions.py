@@ -1,6 +1,7 @@
 from dotenv import load_dotenv 
 from bs4 import BeautifulSoup
 from packaging import version
+import traceback
 import subprocess
 import sys
 import os
@@ -20,7 +21,7 @@ try:
     print(f"Retrieved Debian codename successfully: {debian_codename}")
     print(f"Retrieved Debian version successfully: {debian_version}")
 except Exception as e:
-    error_info.append(("Debian", e))
+    error_info.append(("Debian", e, traceback.format_exc()))
     debian_codename = os.getenv('DEBIAN_CODENAME')
     debian_version = os.getenv('DEBIAN_VERSION')
 
@@ -32,7 +33,7 @@ try:
     
     print(f"Retrieved Dotnet SDK version successfully: {dotnet_version}")
 except Exception as e:
-    error_info.append(("Dotnet", e))
+    error_info.append(("Dotnet", e, traceback.format_exc()))
     dotnet_version = os.getenv('DOTNET_VERSION')
 
 # Rust Stable
@@ -43,7 +44,7 @@ try:
     
     print(f"Retrieved Rust stable version successfully: {rust_version}")
 except Exception as e:
-    error_info.append(("Rust", e))
+    error_info.append(("Rust", e, traceback.format_exc()))
     rust_version = os.getenv('RUST_VERSION')
 
 # NVM Version
@@ -52,7 +53,7 @@ try:
     
     print(f"Retrieved Nvm version successfully: {nvm_version}")
 except Exception as e:
-    error_info.append(("Nvm", e))
+    error_info.append(("Nvm", e, traceback.format_exc()))
     nvm_version = os.getenv('NVM_VERSION')
 
 # Node LTS
@@ -63,7 +64,7 @@ try:
     
     print(f"Retrieved Node LTS version successfully: {node_version}")
 except Exception as e:
-    error_info.append(("Node", e))
+    error_info.append(("Node", e, traceback.format_exc()))
     node_version = os.getenv('NODE_VERSION')
 
 # Java JDK
@@ -77,12 +78,12 @@ try:
     jdk_download_page = BeautifulSoup(requests.get(jdk_dowload_page_url).text, 'html.parser')
     jdk_dowload_link = jdk_download_page.find(lambda tag: tag.name == "a" and tag['href'] is not None and processor_type in tag['href'])['href']
     jdk_download_url = jdk_dowload_link if jdk_dowload_link.startswith('http') else f"https://jdk.java.net/{(jdk_dowload_link.lstrip('/'))}"
-    jdk_version = re.search(r"jdk-(\d+\.\d+\.\d+)", jdk_download_url).group(1)
+    jdk_version = re.search(r"jdk-([\d+\.*]+)", jdk_download_url).group(1)
     
     print(f"Retrieved Java JDK version successfully: {jdk_version}")
     print(f"Retrieved Java JDK download URL successfully: {jdk_download_url}")
 except Exception as e:
-    error_info.append(("Java JDK", e))
+    error_info.append(("Java JDK", e, traceback.format_exc()))
     jdk_version = os.getenv('JDK_VERSION')
     jdk_download_url = os.getenv('JDK_DOWNLOAD_URL')
 
@@ -98,7 +99,7 @@ try:
     print(f"Retrieved Maven version successfully: {maven_version}")
     print(f"Retrieved Maven download URL successfully: {maven_download_url}")
 except Exception as e:
-    error_info.append(("Maven", e))
+    error_info.append(("Maven", e, traceback.format_exc()))
     maven_version = os.getenv('MAVEN_VERSION')
     maven_download_url = os.getenv('MAVEN_DOWNLOAD_URL')
 
@@ -113,7 +114,7 @@ try:
     print(f"Retrieved Go version successfully: {go_version}")
     print(f"Retrieved Go download URL successfully: {go_download_url}")
 except Exception as e:
-    error_info.append(("Go", e))
+    error_info.append(("Go", e, traceback.format_exc()))
     go_version = os.getenv('GO_VERSION')
     go_download_url = os.getenv('GO_DOWNLOAD_URL')
 
@@ -137,7 +138,7 @@ try:
     
     print(f"Retrieved PHP version successfully: {php_version}")
 except Exception as e:
-    error_info.append(("Php", e))
+    error_info.append(("Php", e, traceback.format_exc()))
     php_version = os.getenv('PHP_VERSION')
 
 # NGinx
@@ -148,7 +149,7 @@ try:
     
     print(f"Retrieved Nginx version successfully: {nginx_version}")
 except Exception as e:
-    error_info.append(("Nginx", e))
+    error_info.append(("Nginx", e, traceback.format_exc()))
     nginx_version = os.getenv('NGINX_VERSION')    
 
 # Code Server
@@ -157,7 +158,7 @@ try:
     
     print(f"Retrieved Code Server version successfully: {code_server_version}")
 except Exception as e:
-    error_info.append(("Code Server", e))
+    error_info.append(("Code Server", e, traceback.format_exc()))
     code_server_version = os.getenv('CODE_SERVER_VERSION')
 
 # Python
@@ -167,7 +168,7 @@ try:
 
     print(f"Retrieved Python version successfully: {python_version}")
 except Exception as e:
-    error_info.append(("Python", e))
+    error_info.append(("Python", e, traceback.format_exc()))
     python_version = os.getenv('PYTHON_VERSION')
 
 # JupyterLab
@@ -193,6 +194,8 @@ try:
     with open(requirements_out, 'r') as file:
         original_content = clean_requirements(file.read())
     
+    os.remove(requirements_out)
+    
     subprocess.run(["pip-compile", requirements_in, "--output-file", requirements_out], check=True)
 
     with open(requirements_out, 'r') as file:
@@ -205,7 +208,7 @@ try:
     if jupyter_lab_requirements_changed:
         print(f"Old requirements:\n{original_content}\n\n\n\nNew Requirements :\n{new_content}")
 except Exception as e:
-    error_info.append(("JupyterLab", e))
+    error_info.append(("JupyterLab", e, traceback.format_exc()))
     
 # Gophernote Jupyter Kernel Version
 try:
@@ -213,7 +216,7 @@ try:
     
     print(f"Retrieved Gophernote Jupyter Kernel version successfully: {gophernote_version}")
 except Exception as e:
-    error_info.append(("Gophernote Jupyter Kernel", e))
+    error_info.append(("Gophernote Jupyter Kernel", e, traceback.format_exc()))
     gophernote_version = os.getenv('GOPHERNOTE_JUPYTER_KERNEL_VERSION')
     
 # IJava Jupyter Kernel Version
@@ -224,61 +227,17 @@ try:
     
     print(f"Retrieved IJava Jupyter Kernel download URL successfully: {ijava_download_url}")
 except Exception as e:
-    error_info.append(("IJava Jupyter Kernel", e))
+    error_info.append(("IJava Jupyter Kernel", e, traceback.format_exc()))
     ijava_download_url = os.getenv('IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL')
-    
+
 
 # Dev Container Version
 dev_container_version = version.parse(os.getenv('DEV_CONTAINER_VERSION').split('-')[1] if os.getenv('DEV_CONTAINER_VERSION') else "1.0")
 print(f"Current dev container version: {dev_container_version}")
 
-versions_to_check = [
-    ('DEBIAN_VERSION', debian_version, 'major'),
-    ('DOTNET_VERSION', dotnet_version, 'major'),
-    ('RUST_VERSION', rust_version, 'major'),
-    ('NODE_VERSION', node_version, 'major'),
-    ('JDK_VERSION', jdk_version, 'major'),
-    ('GO_VERSION', go_version, 'minor'),
-    ('CONAN_VERSION', conan_version, 'major'),
-    ('PHP_VERSION', php_version, 'major'),
-    ('NGINX_VERSION', nginx_version, 'major'),
-    ('CODE_SERVER_VERSION', code_server_version, 'major'),
-    ('PYTHON_VERSION', python_version, 'minor'),
-]
-
-bump_version = jupyter_lab_requirements_changed
-
-if jupyter_lab_requirements_changed:
-    print(f"Jupyter Lab Requirements version bump")
-
-for v in versions_to_check:
-    old_version = version.parse(os.getenv(v[0]) if os.getenv(v[0]) else "0.0.0")
-    new_version = version.parse(str(v[1]))
-    
-    if new_version < old_version:
-        print(f"Error, new version for {v[0]} is older than the current version we have ({new_version} < {old_version})");
-        sys.exit(1)
-    
-    if new_version == old_version:
-        continue
-    
-    if v[2] == 'major' and new_version.major > old_version.major:
-        print(f"{v[0]} version bump")
-        bump_version = True
-    
-    if v[2] == 'minor' and (new_version.major > old_version.major or new_version.minor > old_version.minor):
-        print(f"{v[0]} version bump")
-        bump_version = True
-
-if bump_version:
-    major = dev_container_version.major
-    minor = dev_container_version.minor + 1
-    dev_container_version = f"{major}.{minor}"
-    print(f"Version bumped: {dev_container_version} -> {major}.{minor}")
-    print(f"New dev container version: {dev_container_version}")
-
 # Result
-versions = f"""export DEV_CONTAINER_VERSION={debian_codename}-{dev_container_version}
+def get_versions():
+    return f"""export DEV_CONTAINER_VERSION={debian_codename}-{dev_container_version}
 export DEV_CONTAINER_USER={os.getenv('DEV_CONTAINER_USER')}
 export DEV_CONTAINER_USER_GROUP={os.getenv('DEV_CONTAINER_USER_GROUP')}
 export DEBIAN_CODENAME={debian_codename}
@@ -303,11 +262,29 @@ export PYTHON_VERSION={python_version}
 export GOPHERNOTE_JUPYTER_KERNEL_VERSION={gophernote_version}
 export IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL={ijava_download_url}
 """
+versions = get_versions()
 
+with open(".env", 'r') as file:
+    original_content = clean_requirements(file.read())
+
+versions_file_changed = original_content != versions
+    
+    
+# Check if results changed
+bump_version = jupyter_lab_requirements_changed or versions_file_changed
+
+if bump_version:
+    major = dev_container_version.major
+    minor = dev_container_version.minor + 1
+    dev_container_version = f"{major}.{minor}"
+    print(f"Version bumped: {dev_container_version} -> {major}.{minor}")
+    print(f"New dev container version: {dev_container_version}")
+    
 # Write dotenv file
 dotenv_file = '.env'
 if bump_version:
     print('Updating versions')
+    versions = get_versions()
     print(versions)
     with open(dotenv_file, 'w') as file:
         file.write(versions)
@@ -317,7 +294,7 @@ else:
 # Display errors if any
 if len(error_info) > 0:
     for e in error_info:
-        print(f"Error checking {e[0]} version: {str(e[1])}")
+        print(f"Error checking {e[0]} version: {str(e[1])}\r\n{str(e[2])}")
     sys.exit(1)
 
 # Clean exit
