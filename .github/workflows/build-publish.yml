@@ -52,7 +52,11 @@ jobs:
       
       - name: Load .env file and set environment variables required
         run: |
-            source .env
+            cat .env
+            source .env            
+            echo "DEBIAN_CODENAME=$DEBIAN_CODENAME"
+            echo "DEV_CONTAINER_USER=$DEV_CONTAINER_USER"
+            echo "DEV_CONTAINER_VERSION=$DEV_CONTAINER_VERSION"
             echo "DEBIAN_CODENAME=$DEBIAN_CODENAME" >> $GITHUB_ENV
             echo "DEV_CONTAINER_USER=$DEV_CONTAINER_USER" >> $GITHUB_ENV
             echo "DEV_CONTAINER_VERSION=$DEV_CONTAINER_VERSION" >> $GITHUB_ENV
@@ -74,6 +78,7 @@ jobs:
 
       - name: Run tests
         run: |
+          echo "DEV_CONTAINER_VERSION=${{ env.DEV_CONTAINER_VERSION }}"
           docker run --name tests-container -v $GITHUB_WORKSPACE/tests:/tests pleandre/dev-container:tests-${{ github.sha }} /tests/run-tests.sh
           tests_exit_code=$?
           docker rm tests-container
@@ -86,8 +91,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:  
           tags: |
-            pleandre/dev-container:latest
             pleandre/dev-container:${{ env.DEV_CONTAINER_VERSION }}
+            pleandre/dev-container:latest
           build-args: |
             DEBIAN_CODENAME=${{ env.DEBIAN_CODENAME }}
           file: Dockerfile
