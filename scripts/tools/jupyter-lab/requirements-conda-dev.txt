@@ -8,7 +8,7 @@ absl-py==2.1.0
     # via keras
 aiofiles==23.2.1
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-aiohttp==3.9.3
+aiohttp==3.9.4
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 aiosignal==1.3.1
     # via aiohttp
@@ -46,9 +46,9 @@ black==24.3.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.82
+boto3==1.34.83
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.82
+botocore==1.34.83
     # via
     #   boto3
     #   s3transfer
@@ -115,7 +115,7 @@ httpcore==1.0.5
     # via httpx
 httpx==0.27.0
     # via jupyterlab
-idna==3.6
+idna==3.7
     # via
     #   anyio
     #   httpx
@@ -183,7 +183,7 @@ jupyter-lsp==2.2.5
     #   jupyterlab-lsp
 jupyter-scheduler==2.5.1
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-jupyter-server==2.13.0
+jupyter-server==2.14.0
     # via
     #   jupyter-lsp
     #   jupyter-scheduler
@@ -335,11 +335,11 @@ pycodestyle==2.11.1
     #   python-lsp-server
 pycparser==2.22
     # via cffi
-pydantic==2.6.4
+pydantic==2.7.0
     # via
     #   fastapi
     #   jupyter-scheduler
-pydantic-core==2.16.3
+pydantic-core==2.18.1
     # via pydantic
 pydocstyle==6.3.0
     # via python-lsp-server
