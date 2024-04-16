@@ -181,7 +181,7 @@ jupyter-lsp==2.2.5
     #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
     #   jupyterlab
     #   jupyterlab-lsp
-jupyter-scheduler==2.5.1
+jupyter-scheduler==2.5.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 jupyter-server==2.14.0
     # via
@@ -221,7 +221,7 @@ markupsafe==2.1.5
     #   nbconvert
 matplotlib==3.8.4
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-matplotlib-inline==0.1.6
+matplotlib-inline==0.1.7
     # via
     #   ipykernel
     #   ipython
@@ -242,7 +242,7 @@ multidict==6.0.5
     #   yarl
 mypy-extensions==1.0.0
     # via black
-namex==0.0.7
+namex==0.0.8
     # via keras
 nbclient==0.10.0
     # via nbconvert
@@ -383,7 +383,7 @@ pytz==2023.3
     #   pandas
 pyyaml==6.0.1
     # via jupyter-events
-pyzmq==25.1.2
+pyzmq==26.0.0
     # via
     #   ipykernel
     #   jupyter-client
