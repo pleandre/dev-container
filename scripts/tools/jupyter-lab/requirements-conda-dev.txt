@@ -46,9 +46,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.94
+boto3==1.34.95
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.94
+botocore==1.34.95
     # via
     #   boto3
     #   s3transfer
@@ -153,7 +153,7 @@ json5==0.9.25
     # via jupyterlab-server
 jsonpointer==2.4
     # via jsonschema
-jsonschema[format-nongpl]==4.21.1
+jsonschema[format-nongpl]==4.22.0
     # via
     #   jupyter-events
     #   jupyterlab-server
@@ -181,7 +181,7 @@ jupyter-lsp==2.2.5
     #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
     #   jupyterlab
     #   jupyterlab-lsp
-jupyter-scheduler==2.5.2
+jupyter-scheduler==2.6.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 jupyter-server==2.14.0
     # via
