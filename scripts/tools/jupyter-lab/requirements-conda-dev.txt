@@ -46,9 +46,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.95
+boto3==1.34.96
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.95
+botocore==1.34.96
     # via
     #   boto3
     #   s3transfer
@@ -383,14 +383,14 @@ pytz==2023.3
     #   pandas
 pyyaml==6.0.1
     # via jupyter-events
-pyzmq==26.0.2
+pyzmq==26.0.3
     # via
     #   ipykernel
     #   jupyter-client
     #   jupyter-server
 redis==5.0.4
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-referencing==0.35.0
+referencing==0.35.1
     # via
     #   jsonschema
     #   jsonschema-specifications
