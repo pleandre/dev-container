@@ -19,6 +19,7 @@ anyio==4.3.0
     #   httpx
     #   jupyter-server
     #   starlette
+    #   watchfiles
 argon2-cffi==23.1.0
     # via jupyter-server
 argon2-cffi-bindings==21.2.0
@@ -46,9 +47,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.96
+boto3==1.34.97
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.96
+botocore==1.34.97
     # via
     #   boto3
     #   s3transfer
@@ -62,7 +63,10 @@ cffi==1.16.0
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
-    # via black
+    # via
+    #   black
+    #   typer
+    #   uvicorn
 colorama==0.4.6
     # via nbdime
 comm==0.2.2
@@ -81,12 +85,20 @@ defusedxml==0.7.1
     # via nbconvert
 dill==0.3.8
     # via pylint
+dnspython==2.6.1
+    # via email-validator
 docstring-to-markdown==0.15
     # via python-lsp-server
+email-validator==2.1.1
+    # via fastapi
 executing==2.0.1
     # via stack-data
-fastapi==0.110.3
-    # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+fastapi==0.111.0
+    # via
+    #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+    #   fastapi-cli
+fastapi-cli==0.0.2
+    # via fastapi
 fastjsonschema==2.19.1
     # via nbformat
 flake8==7.0.0
@@ -108,16 +120,23 @@ gitpython==3.1.43
 greenlet==3.0.3
     # via sqlalchemy
 h11==0.14.0
-    # via httpcore
+    # via
+    #   httpcore
+    #   uvicorn
 h5py==3.11.0
     # via keras
 httpcore==1.0.5
     # via httpx
+httptools==0.6.1
+    # via uvicorn
 httpx==0.27.0
-    # via jupyterlab
+    # via
+    #   fastapi
+    #   jupyterlab
 idna==3.7
     # via
     #   anyio
+    #   email-validator
     #   httpx
     #   jsonschema
     #   requests
@@ -138,6 +157,7 @@ jedi==0.19.1
     #   python-lsp-server
 jinja2==3.1.3
     # via
+    #   fastapi
     #   jupyter-server
     #   jupyterlab
     #   jupyterlab-server
@@ -147,7 +167,7 @@ jmespath==1.0.1
     # via
     #   boto3
     #   botocore
-joblib==1.4.0
+joblib==1.4.2
     # via scikit-learn
 json5==0.9.25
     # via jupyterlab-server
@@ -277,6 +297,8 @@ numpy==1.26.4
     #   xgboost
 optree==0.11.0
     # via keras
+orjson==3.10.2
+    # via fastapi
 overrides==7.7.0
     # via jupyter-server
 packaging==24.0
@@ -368,13 +390,17 @@ python-dateutil==2.9.0.post0
     #   matplotlib
     #   pandas
 python-dotenv==1.0.1
-    # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+    # via
+    #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+    #   uvicorn
 python-json-logger==2.0.7
     # via jupyter-events
 python-lsp-jsonrpc==1.1.2
     # via python-lsp-server
 python-lsp-server[all]==1.11.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+python-multipart==0.0.9
+    # via fastapi
 pytoolconfig[global]==1.3.1
     # via rope
 pytz==2023.3
@@ -382,7 +408,9 @@ pytz==2023.3
     #   jupyter-scheduler
     #   pandas
 pyyaml==6.0.1
-    # via jupyter-events
+    # via
+    #   jupyter-events
+    #   uvicorn
 pyzmq==26.0.3
     # via
     #   ipykernel
@@ -409,7 +437,9 @@ rfc3986-validator==0.1.1
     #   jsonschema
     #   jupyter-events
 rich==13.7.1
-    # via keras
+    # via
+    #   keras
+    #   typer
 rope==1.13.0
     # via python-lsp-server
 rpds-py==0.18.0
@@ -426,6 +456,8 @@ scipy==1.13.0
     #   xgboost
 send2trash==1.8.3
     # via jupyter-server
+shellingham==1.5.4
+    # via typer
 six==1.16.0
     # via
     #   asttokens
@@ -484,6 +516,8 @@ traitlets==5.14.3
     #   nbclient
     #   nbconvert
     #   nbformat
+typer==0.12.3
+    # via fastapi-cli
 types-python-dateutil==2.9.0.20240316
     # via arrow
 typing-extensions==4.11.0
@@ -492,10 +526,12 @@ typing-extensions==4.11.0
     #   optree
     #   pydantic
     #   pydantic-core
+    #   typer
 tzdata==2024.1
     # via pandas
 ujson==5.9.0
     # via
+    #   fastapi
     #   python-lsp-jsonrpc
     #   python-lsp-server
 uri-template==1.3.0
@@ -504,6 +540,14 @@ urllib3==2.2.1
     # via
     #   botocore
     #   requests
+uvicorn[standard]==0.29.0
+    # via
+    #   fastapi
+    #   fastapi-cli
+uvloop==0.19.0
+    # via uvicorn
+watchfiles==0.21.0
+    # via uvicorn
 wcwidth==0.2.13
     # via prompt-toolkit
 webcolors==1.13
@@ -515,7 +559,9 @@ webencodings==0.5.1
 websocket-client==1.8.0
     # via jupyter-server
 websockets==12.0
-    # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+    # via
+    #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+    #   uvicorn
 whatthepatch==1.0.5
     # via python-lsp-server
 xgboost==2.0.3
