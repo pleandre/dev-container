@@ -39,7 +39,7 @@ attrs==23.2.0
     #   referencing
 autopep8==2.0.4
     # via python-lsp-server
-babel==2.14.0
+babel==2.15.0
     # via jupyterlab-server
 beautifulsoup4==4.12.3
     # via nbconvert
@@ -155,7 +155,7 @@ jedi==0.19.1
     # via
     #   ipython
     #   python-lsp-server
-jinja2==3.1.3
+jinja2==3.1.4
     # via
     #   fastapi
     #   jupyter-server
