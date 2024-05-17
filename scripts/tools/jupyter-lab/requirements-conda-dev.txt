@@ -26,7 +26,7 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 arrow==1.3.0
     # via isoduration
-astroid==3.2.0
+astroid==3.2.1
     # via pylint
 asttokens==2.4.1
     # via stack-data
@@ -47,9 +47,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.106
+boto3==1.34.107
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.106
+botocore==1.34.107
     # via
     #   boto3
     #   s3transfer
@@ -221,7 +221,7 @@ jupyterlab==4.2.0
     # via
     #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
     #   jupyterlab-lsp
-jupyterlab-git==0.50.0
+jupyterlab-git==0.50.1
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 jupyterlab-lsp==5.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
@@ -570,5 +570,5 @@ yapf==0.40.2
     # via python-lsp-server
 yarl==1.9.4
     # via aiohttp
-zipp==3.18.1
+zipp==3.18.2
     # via importlib-metadata
