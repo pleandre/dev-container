@@ -26,7 +26,7 @@ argon2-cffi-bindings==21.2.0
     # via argon2-cffi
 arrow==1.3.0
     # via isoduration
-astroid==3.2.1
+astroid==3.2.2
     # via pylint
 asttokens==2.4.1
     # via stack-data
@@ -94,10 +94,8 @@ email-validator==2.1.1
 executing==2.0.1
     # via stack-data
 fastapi==0.111.0
-    # via
-    #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-    #   fastapi-cli
-fastapi-cli==0.0.3
+    # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
+fastapi-cli==0.0.4
     # via fastapi
 fastjsonschema==2.19.1
     # via nbformat
@@ -541,9 +539,7 @@ urllib3==2.2.1
     #   botocore
     #   requests
 uvicorn[standard]==0.29.0
-    # via
-    #   fastapi
-    #   fastapi-cli
+    # via fastapi
 uvloop==0.19.0
     # via uvicorn
 watchfiles==0.21.0
