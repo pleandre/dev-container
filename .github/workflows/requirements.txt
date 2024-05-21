@@ -1,5 +1,5 @@
 beautifulsoup4==4.12.3
 python-dotenv==1.0.1
 packaging==23.2
-requests==2.31.0
+requests==2.32.0
 pip-tools==7.4.0
