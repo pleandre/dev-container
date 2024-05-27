@@ -14,7 +14,7 @@ aiosignal==1.3.1
     # via aiohttp
 annotated-types==0.7.0
     # via pydantic
-anyio==4.3.0
+anyio==4.4.0
     # via
     #   httpx
     #   jupyter-server
@@ -566,5 +566,5 @@ yapf==0.40.2
     # via python-lsp-server
 yarl==1.9.4
     # via aiohttp
-zipp==3.18.2
+zipp==3.19.0
     # via importlib-metadata
