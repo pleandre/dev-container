@@ -101,7 +101,7 @@ fastjsonschema==2.19.1
     # via nbformat
 flake8==7.0.0
     # via python-lsp-server
-fonttools==4.52.1
+fonttools==4.52.4
     # via matplotlib
 fqdn==1.5.1
     # via jsonschema
@@ -335,7 +335,7 @@ pluggy==1.5.0
     # via python-lsp-server
 prometheus-client==0.20.0
     # via jupyter-server
-prompt-toolkit==3.0.43
+prompt-toolkit==3.0.44
     # via ipython
 psutil==5.9.8
     # via
@@ -542,7 +542,7 @@ uvicorn[standard]==0.29.0
     # via fastapi
 uvloop==0.19.0
     # via uvicorn
-watchfiles==0.21.0
+watchfiles==0.22.0
     # via uvicorn
 wcwidth==0.2.13
     # via prompt-toolkit
