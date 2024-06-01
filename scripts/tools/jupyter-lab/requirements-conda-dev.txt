@@ -47,9 +47,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.116
+boto3==1.34.117
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.116
+botocore==1.34.117
     # via
     #   boto3
     #   s3transfer
@@ -101,7 +101,7 @@ fastjsonschema==2.19.1
     # via nbformat
 flake8==7.0.0
     # via python-lsp-server
-fonttools==4.52.4
+fonttools==4.53.0
     # via matplotlib
 fqdn==1.5.1
     # via jsonschema
@@ -143,7 +143,7 @@ importlib-metadata==7.1.0
     # via yapf
 ipykernel==6.29.4
     # via jupyterlab
-ipython==8.24.0
+ipython==8.25.0
     # via ipykernel
 isoduration==20.11.0
     # via jsonschema
@@ -201,7 +201,7 @@ jupyter-lsp==2.2.5
     #   jupyterlab-lsp
 jupyter-scheduler==2.7.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-jupyter-server==2.14.0
+jupyter-server==2.14.1
     # via
     #   jupyter-lsp
     #   jupyter-scheduler
@@ -567,5 +567,5 @@ yapf==0.40.2
     # via python-lsp-server
 yarl==1.9.4
     # via aiohttp
-zipp==3.19.0
+zipp==3.19.1
     # via importlib-metadata
