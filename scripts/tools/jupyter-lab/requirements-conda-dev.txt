@@ -47,9 +47,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.120
+boto3==1.34.121
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.120
+botocore==1.34.121
     # via
     #   boto3
     #   s3transfer
@@ -373,7 +373,7 @@ pygments==2.18.0
     #   nbconvert
     #   nbdime
     #   rich
-pylint==3.2.2
+pylint==3.2.3
     # via
     #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
     #   python-lsp-server
@@ -414,7 +414,7 @@ pyzmq==26.0.3
     #   ipykernel
     #   jupyter-client
     #   jupyter-server
-redis==5.0.4
+redis==5.0.5
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 referencing==0.35.1
     # via
@@ -490,7 +490,7 @@ tomli==2.0.1
     # via yapf
 tomlkit==0.12.5
     # via pylint
-tornado==6.4
+tornado==6.4.1
     # via
     #   ipykernel
     #   jupyter-client
@@ -547,7 +547,7 @@ watchfiles==0.22.0
     # via uvicorn
 wcwidth==0.2.13
     # via prompt-toolkit
-webcolors==1.13
+webcolors==24.6.0
     # via jsonschema
 webencodings==0.5.1
     # via
