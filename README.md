@@ -9,7 +9,7 @@
 [![Last Commit](https://img.shields.io/github/last-commit/pleandre/dev-container.svg?style=flat)](https://github.com/pleandre/dev-container/commits/main)
 [![Code Size](https://img.shields.io/github/languages/code-size/pleandre/dev-container.svg?style=flat)](https://github.com/pleandre/dev-container)
 
-A comprehensive, multi-language development environment in a container, featuring code-server, JupyterLab, and a suite of development tools.  
+A comprehensive, multi-language development environment in a container, featuring code-server, JupyterLab, NoVNC and Desktop, and a suite of development tools.  
 
 ## Quick Start with docker-compose
 To get started quickly, you can use `docker-compose` to run the container. First, create a `data` directory with the following subdirectories to persist your configuration and extensions:
@@ -32,6 +32,9 @@ services:
       - "81:81"      # Port for Nginx / PHP
       - "80:80"      # Port for APIs
       - "8888:8888"  # Port for Jupyter
+      - "6080:6080"  # Port for NoVNC
+      - "3389:3389"  # Port for RDP
+      - "5901:5901"  # Port for VNC
 #    volumes:
 #      - "/var/run/docker.sock:/var/run/docker.sock"  # Optional, Socket for Docker, if you want to have access to your host docker within the dev container
 #      - "./settings/code-server-vscode-marketplace.json:/opt/dev-container/code-server/marketplace.json" # Optional, code server extension market place settings
@@ -76,7 +79,7 @@ The `dev-container` is equipped with a comprehensive suite of development, cloud
 - [Conan](https://conan.io/) (C/C++ Package Manager)
 - [Composer](https://getcomposer.org/) (Php Dependency Manager)
 - [Vcpkg](https://github.com/microsoft/vcpkg) (C/C++ Package Manager)
-- [Nginx](https://nginx.org/) (Web Server)
+- [Nginx](https://nginx.org/) (Web Server with PHP)
 - [Conda](https://docs.conda.io/en/latest/) (Python, Package, Dependency, and Environment Management)
 - [AWS CLI](https://aws.amazon.com/cli/) (Amazon Web Services Command Line Interface)
 - [Google Cloud SDK](https://cloud.google.com/sdk) (Toolset for Google Cloud Platform)
@@ -85,6 +88,12 @@ The `dev-container` is equipped with a comprehensive suite of development, cloud
 - [Ansible](https://www.ansible.com/) (Software Provisioning, Configuration Management, and Application Deployment Tool)
 - [Docker Client](https://docs.docker.com/engine/reference/commandline/cli/) (Command Line Interface for Docker Containers)
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/) (Kubernetes Command-Line Tool)
+- [Xfce](https://xfce.org/) (Xfce Lightweight Desktop)
+- [TigerVNC](https://tigervnc.org/) (VNC server)
+- [noVNC](https://github.com/novnc/noVNC) (VNC client in the Browser)
+- [Chrome](https://www.google.com/intl/en_us/chrome/) (Web Browser)
+- [VsCode](https://code.visualstudio.com/) (VsCode Desktop)
+- [Xrdp](https://github.com/neutrinolabs/xrdp) (Open Source RDP Server)
 
 ## Versions Auto-Updates
 

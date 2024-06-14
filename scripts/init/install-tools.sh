@@ -37,16 +37,6 @@ apt install -y -qq dos2unix \
 # Install git Large File System
 git lfs install
 
-# Setup supervisord config (for services running)
-echo "[supervisord]
-nodaemon=true
-user=root
-pidfile=/var/run/supervisord.pid
-logfile=/dev/null
-logfile_maxbytes=0
-
-" > /etc/supervisor/conf.d/supervisord.conf
-
 # Display install size
 echo "- Installation completed: common tools"
 echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"

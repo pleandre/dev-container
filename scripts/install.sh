@@ -34,6 +34,7 @@ apt update -qq
 ./tools/cloud/install-cloud-tools.sh
 ./tools/code-server/install-code-server.sh
 ./tools/jupyter-lab/install-jupyter-lab.sh
+./tools/vnc/install-vnc.sh
 
 # Clean after installs
 apt clean
