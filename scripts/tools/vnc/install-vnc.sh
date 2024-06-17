@@ -2,53 +2,77 @@
 set -e
 
 # Install VNC
-echo "> Installing Xfce4, Chrome, Vs Code, One Password Desktop, TigerVNC, NoVNC, XRDP"
+echo "> Installing TigerVNC, NoVNC, XRDP"
 space_before=$(df --output=avail / | tail -n 1)
-
-# Install Xfse4 Desktop - Minimal Installation
-# See: https://github.com/coonrad/Debian-Xfce4-Minimal-Install
-# Need dbus-x11 to work with TigerVNC
-echo ">> Installing Xfse4 Desktop"
-apt install -y -qq \
-    libxfce4ui-utils \
-    thunar \
-    xfce4-appfinder \
-    xfce4-panel \
-    xfce4-session \
-    xfce4-settings \
-    xfce4-terminal \
-    xfconf \
-    xfdesktop4 \
-    xfwm4
-
-echo ">> Installing Chrome"
-curl -fsSL "https://dl.google.com/linux/linux_signing_key.pub" | gpg --dearmor --yes -o /etc/apt/keyrings/google-chrome.gpg
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
-apt update -qq
-apt install -y -qq google-chrome-stable
-
-echo ">> Installing VsCode"
-curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor --yes -o /etc/apt/keyrings/packages.microsoft.gpg
-echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list
-apt update -qq
-apt install -y -qq code
-
-echo ">> Installing One Password Desktop"
-apt install -qq -y 1password
 
 echo ">> Installing Tiger VNC"
 apt install -qq -y tigervnc-standalone-server
-su -l $DEV_CONTAINER_USER /bin/bash -c "tigervncserver -xstartup /usr/bin/xfce4-session -localhost no -SecurityTypes None --I-KNOW-THIS-IS-INSECURE :1"
 
-echo ">> Installing No VNC Server"
-# TODO: Replace with more recent version, similar to https://github.com/SeleniumHQ/docker-selenium/blob/trunk/NodeBase/Dockerfile#L107
-apt install -qq -y novnc python3-websockify
-websockify -D --web=/usr/share/novnc/ 6080 localhost:5901
+echo ">> Installing No VNC Server: Web UI"
+# Download and extract files
+wget "${NO_VNC_DOWNLOAD_URL}" -O /tmp/noVnc.tar.gz -q
+mkdir -p /tmp/noVnc
+tar -C /tmp/noVnc -xf /tmp/noVnc.tar.gz
+
+# Folder structure will be /tmp/noVnc/novnc-noVNC-52f5a95 for example
+# 52f5a95 is a hash and can change we move the content of this directory one level up
+pushd /tmp/noVnc
+for dir in *; do
+    if [ -d "$dir" ]; then
+        if ls "$dir"/* &> /dev/null; then
+            mv "$dir"/* .
+            rm -rf "$dir"
+            break
+        fi
+    fi
+done
+popd
+
+# Copy vnc.html into index.html
+cp /tmp/noVnc/vnc.html /tmp/noVnc/index.html
+
+# Move to permanent folder
+mv /tmp/noVnc /usr/share/novnc/
+
+# Remove folders
+rm /tmp/noVnc.tar.gz
+
+# Change Ownership
+chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /usr/share/novnc/
 
 echo ">> Installing XRDP"
 apt install -qq -y xrdp
-/etc/init.d/xrdp start
+
+echo ">> Copying vnc startup scripts"
+mkdir -p /opt/dev-container/vnc/
+cp /scripts/tools/vnc/opt/* /opt/dev-container/vnc/
+
+# Setup service
+echo ">> Creating VNC and RDP services config in Supervisord"
+
+echo "[program:vnc]
+command=bash -c '/opt/dev-container/vnc/vnc-start.sh'
+directory=/home/${DEV_CONTAINER_USER}/
+user=${DEV_CONTAINER_USER}
+autostart=true
+autorestart=true
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
+
+[program:rdp]
+command=bash -c '/opt/dev-container/vnc/rdp-start.sh'
+directory=/home/
+user=root
+autostart=true
+autorestart=true
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
+
+" >> /etc/supervisor/conf.d/supervisord.conf
+
 
 # Display install size
-echo "- Installation completed: Xfce4, Chrome, Vs Code, One Password Desktop, TigerVNC, NoVNC, XRDP"
+echo "- Installation completed: TigerVNC, NoVNC, XRDP"
 echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"

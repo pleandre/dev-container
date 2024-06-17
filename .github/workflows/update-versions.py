@@ -230,10 +230,13 @@ except Exception as e:
     error_info.append(("IJava Jupyter Kernel", e, traceback.format_exc()))
     ijava_download_url = os.getenv('IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL')
 
-
-# Dev Container Version
-dev_container_version = version.parse(os.getenv('DEV_CONTAINER_VERSION').split('-')[1] if os.getenv('DEV_CONTAINER_VERSION') else "1.0")
-print(f"Current dev container version: {dev_container_version}")
+# noVNC Url
+try:
+    no_vnc_download_url = requests.get("https://api.github.com/repos/novnc/noVNC/releases/latest").json()['tarball_url']
+    print(f"Retrieved NoVNC Download URL successfully: {no_vnc_download_url}")
+except Exception as e:
+    error_info.append(("No VNC Download URL", e, traceback.format_exc()))
+    no_vnc_download_url = os.getenv('NO_VNC_DOWNLOAD_URL')
 
 # Result
 def get_versions():
@@ -261,6 +264,7 @@ export CONDA_ENV={os.getenv('CONDA_ENV')}
 export PYTHON_VERSION={python_version}
 export GOPHERNOTE_JUPYTER_KERNEL_VERSION={gophernote_version}
 export IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL={ijava_download_url}
+export NO_VNC_DOWNLOAD_URL={no_vnc_download_url}
 """
 versions = get_versions()
 
