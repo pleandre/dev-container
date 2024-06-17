@@ -36,6 +36,7 @@ apt update -qq
 ./tools/jupyter-lab/install-jupyter-lab.sh
 ./tools/desktop/install-desktop.sh
 ./tools/vnc/install-vnc.sh
+./tools/jetbrains/install-jetbrains.sh
 
 # Clean after installs
 apt clean
