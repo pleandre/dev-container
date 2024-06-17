@@ -238,6 +238,15 @@ except Exception as e:
     error_info.append(("No VNC Download URL", e, traceback.format_exc()))
     no_vnc_download_url = os.getenv('NO_VNC_DOWNLOAD_URL')
 
+# JetBrains ToolBox Version
+try:
+    jetbrains_tba_releases = requests.get("https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release").json()
+    jetbrains_download_url = jetbrains_tba_releases['TBA'][0]['linux']['link']
+    print(f"Retrieved JetBrains ToolBox URL Sucessfully: {jetbrains_download_url}")
+except Exception as e:
+    error_info.append(("JetBrains ToolBox URL", e, traceback.format_exc())) = os.getenv('JETBRAINS_TOOLBOX_DOWNLOAD_URL')
+    jetbrains_download_url = os.getenv('JETBRAINS_TOOLBOX_DOWNLOAD_URL')
+
 # Result
 def get_versions():
     return f"""export DEV_CONTAINER_VERSION={debian_codename}-{dev_container_version}
@@ -265,6 +274,7 @@ export PYTHON_VERSION={python_version}
 export GOPHERNOTE_JUPYTER_KERNEL_VERSION={gophernote_version}
 export IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL={ijava_download_url}
 export NO_VNC_DOWNLOAD_URL={no_vnc_download_url}
+export JETBRAINS_TOOLBOX_DOWNLOAD_URL={jetbrains_download_url}
 """
 versions = get_versions()
 
