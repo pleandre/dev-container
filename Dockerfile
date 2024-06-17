@@ -14,4 +14,4 @@ ARG DEV_CONTAINER_USER
 WORKDIR /home/${DEV_CONTAINER_USER}
 
 # Start Services
-CMD ["/usr/bin/supervisord", "--nodaemon"]
+CMD ["/entrypoint.sh"]

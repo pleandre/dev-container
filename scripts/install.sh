@@ -34,6 +34,7 @@ apt update -qq
 ./tools/cloud/install-cloud-tools.sh
 ./tools/code-server/install-code-server.sh
 ./tools/jupyter-lab/install-jupyter-lab.sh
+./tools/desktop/install-desktop.sh
 ./tools/vnc/install-vnc.sh
 
 # Clean after installs
@@ -44,3 +45,6 @@ rm -rf /var/lib/apt/lists/*
 sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /home/${DEV_CONTAINER_USER}
 find /home/${DEV_CONTAINER_USER} -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
 find /home/${DEV_CONTAINER_USER} -type f -exec chmod u+rw,g+rw,o+r '{}' \;
+
+# Copy entrypoint script
+cp /scripts/entrypoint.sh /entrypoint.sh
