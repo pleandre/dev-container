@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=RustRover
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/rustrover.sh
+Icon=/opt/dev-container/jetbrains/icons/rustrover.png

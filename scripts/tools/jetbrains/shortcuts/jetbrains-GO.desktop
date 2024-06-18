@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=GoLand
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/goland.sh
+Icon=/opt/dev-container/jetbrains/icons/goland.png

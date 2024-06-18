@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Rider
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/rider.sh
+Icon=/opt/dev-container/jetbrains/icons/rider.png
