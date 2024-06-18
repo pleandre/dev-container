@@ -1,0 +1,1 @@
+export PATH="/opt/dev-container/jetbrains/scripts/:$PATH"

@@ -1,6 +1,7 @@
 from dotenv import load_dotenv 
 from bs4 import BeautifulSoup
 from packaging import version
+from jinja2 import Environment, FileSystemLoader
 import traceback
 import subprocess
 import sys
@@ -238,14 +239,59 @@ except Exception as e:
     error_info.append(("No VNC Download URL", e, traceback.format_exc()))
     no_vnc_download_url = os.getenv('NO_VNC_DOWNLOAD_URL')
 
-# JetBrains ToolBox Version
+# JetBrains Versions
+def render_jinja_template(template_path, context, output_file):
+    # Setup Jinja
+    template_dir, template_file = os.path.split(template_path)
+    env = Environment(loader=FileSystemLoader(template_dir))
+    template = env.get_template(template_file)
+    
+    # Render the template with the provided context
+    rendered_content = template.render(context)
+    
+    # Get Existing Content
+    existing_content = None
+    if os.path.exists(output_file):
+        with open(output_file, 'r') as file:
+            existing_content = file.read()
+    
+    # Write Output
+    with open(output_file, 'w') as file:
+        file.write(rendered_content)
+    
+    changed = rendered_content != existing_content
+    
+    if changed:
+        print(f"Jinja output changed: " + output_file)
+    
+    return changed
+
+jetbrains_changed = False
 try:
-    jetbrains_tba_releases = requests.get("https://data.services.jetbrains.com/products/releases?code=TBA&latest=true&type=release").json()
-    jetbrains_download_url = jetbrains_tba_releases['TBA'][0]['linux']['link']
-    print(f"Retrieved JetBrains ToolBox URL Sucessfully: {jetbrains_download_url}")
+    jetbrains_products = [
+        { 'code': 'PS', 'name': 'PhpStorm', 'icon': 'phpstorm.png', 'bin': 'phpstorm.sh' },
+        { 'code': 'DG', 'name': 'DataGrip', 'icon': 'datagrip.png', 'bin': 'datagrip.sh' },
+        { 'code': 'GO', 'name': 'GoLand', 'icon': 'goland.png', 'bin': 'goland.sh' },
+        { 'code': 'CL', 'name': 'CLion', 'icon': 'clion.png', 'bin': 'clion.sh' },
+        { 'code': 'RD', 'name': 'Rider', 'icon': 'rider.png', 'bin': 'rider.sh' },
+        { 'code': 'IIU', 'name': 'IntelliJ IDEA Ultimate', 'icon': 'idea.png', 'bin': 'idea.sh' },
+        { 'code': 'IIC', 'name': 'IntelliJ IDEA Community Edition', 'icon': 'idea-ce.png', 'bin': 'idea.sh' },
+        { 'code': 'PCP', 'name': 'PyCharm Professional Edition', 'icon': 'pycharm.png', 'bin': 'pycharm.sh' },
+        { 'code': 'PCC', 'name': 'PyCharm Community Edition', 'icon': 'pycharm-ce.png', 'bin': 'pycharm.sh' },
+        { 'code': 'WS', 'name': 'WebStorm', 'icon': 'webstorm.png', 'bin': 'webstorm.sh' },
+        { 'code': 'RR', 'name': 'RustRover', 'icon': 'rustrover.png', 'bin': 'rustrover.sh' }
+    ]
+    jetbrains_product_codes = ",".join([product['code'] for product in jetbrains_products])
+    jetbrains_releases = requests.get("https://data.services.jetbrains.com/products/releases?code=" + jetbrains_product_codes + "&latest=true&type=release").json()
+    
+    for product in jetbrains_products:
+        product['download_url'] = jetbrains_tba_releases[product['code']][0]['linux']['link']
+        jetbrains_changed |= render_jinja_template('./scripts/tools/jetbrains/templates/install.tpl', product, './script/tools/jetbrains/scripts/'+product['code']+'.sh')
+        jetbrains_changed |= render_jinja_template('./scripts/tools/jetbrains/templates/desktop-shortcut.tpl', product, './script/tools/jetbrains/shortcuts/jetbrains-'+product['code']+'.desktop')
+        
+    print(f"Updated JetBrains Versions Sucessfully: {jetbrains_download_url}")
 except Exception as e:
-    error_info.append(("JetBrains ToolBox URL", e, traceback.format_exc())) = os.getenv('JETBRAINS_TOOLBOX_DOWNLOAD_URL')
-    jetbrains_download_url = os.getenv('JETBRAINS_TOOLBOX_DOWNLOAD_URL')
+    error_info.append(("JetBrains Versions", e, traceback.format_exc()))
 
 # Result
 def get_versions():
@@ -274,7 +320,6 @@ export PYTHON_VERSION={python_version}
 export GOPHERNOTE_JUPYTER_KERNEL_VERSION={gophernote_version}
 export IJAVA_JUPYTER_KERNEL_DOWNLOAD_URL={ijava_download_url}
 export NO_VNC_DOWNLOAD_URL={no_vnc_download_url}
-export JETBRAINS_TOOLBOX_DOWNLOAD_URL={jetbrains_download_url}
 """
 versions = get_versions()
 
@@ -283,9 +328,13 @@ with open(".env", 'r') as file:
 
 versions_file_changed = original_content != versions
     
-    
 # Check if results changed
-bump_version = jupyter_lab_requirements_changed or versions_file_changed
+print(f"""jupyter_lab_requirements_changed={jupyter_lab_requirements_changed}
+jetbrains_changed={jetbrains_changed}
+versions_file_changed={versions_file_changed}
+""")
+
+bump_version = jupyter_lab_requirements_changed or jetbrains_changed or versions_file_changed
 
 if bump_version:
     major = dev_container_version.major
