@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=IntelliJ IDEA Community Edition
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/idea-ce.sh
+Icon=/opt/dev-container/jetbrains/icons/idea-ce.png

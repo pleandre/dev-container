@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=CLion
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/clion.sh
+Icon=/opt/dev-container/jetbrains/icons/clion.png

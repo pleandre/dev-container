@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=DataGrip
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/datagrip.sh
+Icon=/opt/dev-container/jetbrains/icons/datagrip.png

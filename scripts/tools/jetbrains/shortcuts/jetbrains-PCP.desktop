@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=PyCharm Professional Edition
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/pycharm.sh
+Icon=/opt/dev-container/jetbrains/icons/pycharm.png

@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=WebStorm
+Categories=Development,IDE
+Exec=/opt/dev-container/jetbrains/scripts/webstorm.sh
+Icon=/opt/dev-container/jetbrains/icons/webstorm.png
