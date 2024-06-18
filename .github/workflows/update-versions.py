@@ -269,31 +269,37 @@ def render_jinja_template(template_path, context, output_file):
 jetbrains_changed = False
 try:
     jetbrains_products = [
-        { 'code': 'PS', 'name': 'PhpStorm', 'icon': 'phpstorm.png', 'bin': 'phpstorm.sh' },
-        { 'code': 'DG', 'name': 'DataGrip', 'icon': 'datagrip.png', 'bin': 'datagrip.sh' },
-        { 'code': 'GO', 'name': 'GoLand', 'icon': 'goland.png', 'bin': 'goland.sh' },
-        { 'code': 'CL', 'name': 'CLion', 'icon': 'clion.png', 'bin': 'clion.sh' },
-        { 'code': 'RD', 'name': 'Rider', 'icon': 'rider.png', 'bin': 'rider.sh' },
-        { 'code': 'IIU', 'name': 'IntelliJ IDEA Ultimate', 'icon': 'idea.png', 'bin': 'idea.sh' },
-        { 'code': 'IIC', 'name': 'IntelliJ IDEA Community Edition', 'icon': 'idea-ce.png', 'bin': 'idea.sh' },
-        { 'code': 'PCP', 'name': 'PyCharm Professional Edition', 'icon': 'pycharm.png', 'bin': 'pycharm.sh' },
-        { 'code': 'PCC', 'name': 'PyCharm Community Edition', 'icon': 'pycharm-ce.png', 'bin': 'pycharm.sh' },
-        { 'code': 'WS', 'name': 'WebStorm', 'icon': 'webstorm.png', 'bin': 'webstorm.sh' },
-        { 'code': 'RR', 'name': 'RustRover', 'icon': 'rustrover.png', 'bin': 'rustrover.sh' }
+        { 'code': 'PS', 'name': 'PhpStorm', 'icon': 'phpstorm.png', 'bin': 'phpstorm.sh', 'script': 'phpstorm.sh' },
+        { 'code': 'DG', 'name': 'DataGrip', 'icon': 'datagrip.png', 'bin': 'datagrip.sh', 'script': 'datagrip.sh' },
+        { 'code': 'GO', 'name': 'GoLand', 'icon': 'goland.png', 'bin': 'goland.sh', 'script': 'goland.sh' },
+        { 'code': 'CL', 'name': 'CLion', 'icon': 'clion.png', 'bin': 'clion.sh', 'script': 'clion.sh' },
+        { 'code': 'RD', 'name': 'Rider', 'icon': 'rider.png', 'bin': 'rider.sh', 'script': 'rider.sh' },
+        { 'code': 'IIU', 'name': 'IntelliJ IDEA Ultimate', 'icon': 'idea.png', 'bin': 'idea.sh', 'script': 'idea.sh' },
+        { 'code': 'IIC', 'name': 'IntelliJ IDEA Community Edition', 'icon': 'idea-ce.png', 'bin': 'idea.sh', 'script': 'idea-ce.sh' },
+        { 'code': 'PCP', 'name': 'PyCharm Professional Edition', 'icon': 'pycharm.png', 'bin': 'pycharm.sh', 'script': 'pycharm.sh' },
+        { 'code': 'PCC', 'name': 'PyCharm Community Edition', 'icon': 'pycharm-ce.png', 'bin': 'pycharm.sh', 'script': 'pycharm-ce.sh' },
+        { 'code': 'WS', 'name': 'WebStorm', 'icon': 'webstorm.png', 'bin': 'webstorm.sh', 'script': 'webstorm.sh' },
+        { 'code': 'RR', 'name': 'RustRover', 'icon': 'rustrover.png', 'bin': 'rustrover.sh', 'script': 'rustrover.sh' }
     ]
     jetbrains_product_codes = ",".join([product['code'] for product in jetbrains_products])
-    jetbrains_releases = requests.get("https://data.services.jetbrains.com/products/releases?code=" + jetbrains_product_codes + "&latest=true&type=release").json()
+    jetbrains_release_urls = "https://data.services.jetbrains.com/products/releases?code=" + jetbrains_product_codes + "&latest=true&type=release"
+    print(f"jetbrains_release_urls={jetbrains_release_urls}")
+    jetbrains_releases = requests.get(jetbrains_release_urls).json()
     
     for product in jetbrains_products:
-        product['download_url'] = jetbrains_tba_releases[product['code']][0]['linux']['link']
-        jetbrains_changed |= render_jinja_template('./scripts/tools/jetbrains/templates/install.tpl', product, './script/tools/jetbrains/scripts/'+product['code']+'.sh')
-        jetbrains_changed |= render_jinja_template('./scripts/tools/jetbrains/templates/desktop-shortcut.tpl', product, './script/tools/jetbrains/shortcuts/jetbrains-'+product['code']+'.desktop')
+        print('Updating ' + product['name'])
+        product['download_url'] = jetbrains_releases[product['code']][0]['downloads']['linux']['link']
+        jetbrains_changed |= render_jinja_template('./scripts/tools/jetbrains/templates/install.tpl', product, './scripts/tools/jetbrains/scripts/'+product['script'])
+        jetbrains_changed |= render_jinja_template('./scripts/tools/jetbrains/templates/desktop-shortcut.tpl', product, './scripts/tools/jetbrains/shortcuts/jetbrains-'+product['code']+'.desktop')
         
-    print(f"Updated JetBrains Versions Sucessfully: {jetbrains_download_url}")
+    print(f"Updated JetBrains Versions Sucessfully: (jetbrains_changed={jetbrains_changed}")
 except Exception as e:
     error_info.append(("JetBrains Versions", e, traceback.format_exc()))
 
-# Result
+# Dev Container Version
+dev_container_version = version.parse(os.getenv('DEV_CONTAINER_VERSION').split('-')[1] if os.getenv('DEV_CONTAINER_VERSION') else "1.0")
+print(f"Current dev container version: {dev_container_version}")
+
 def get_versions():
     return f"""export DEV_CONTAINER_VERSION={debian_codename}-{dev_container_version}
 export DEV_CONTAINER_USER={os.getenv('DEV_CONTAINER_USER')}

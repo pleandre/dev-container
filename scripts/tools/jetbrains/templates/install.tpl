@@ -2,10 +2,10 @@
 set -e
 
 # Settings
-NAME={{ name }}
-DOWNLOAD_URL={{ download_url }}
-PRODUCT_CODE={{ code }}
-BIN_FILE={{ bin }}
+NAME="{{ name }}"
+DOWNLOAD_URL="{{ download_url }}"
+PRODUCT_CODE="{{ code }}"
+BIN_FILE="{{ bin }}"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
 BIN_SIMLINK="${DESTINATION}${BINFILE}"
 
@@ -19,8 +19,8 @@ fi
 
 # Otherwise we install the app
 # Create the directory
-mkdir -p $DESTINATION
-chmod 755 $DESTINATION
+mkdir -p "${DESTINATION}"
+chmod 755 "${DESTINATION}"
 
 # Download the app
 TAR_FILE="${DESTINATION}${PRODUCT_CODE}.tar.gz"
