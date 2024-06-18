@@ -20,7 +20,7 @@ echo ">> Creating jupyter folder in user home"
 su -l $DEV_CONTAINER_USER /bin/bash -c "mkdir -p /home/$DEV_CONTAINER_USER/jupyter/"
 
 
-echo ">> Copying code-server startup scripts"
+echo ">> Copying jupyter-lab startup scripts"
 mkdir -p /opt/dev-container/jupyter/
 cp /scripts/tools/jupyter-lab/opt/* /opt/dev-container/jupyter/
 

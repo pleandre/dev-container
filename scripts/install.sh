@@ -37,6 +37,7 @@ apt update -qq
 ./tools/desktop/install-desktop.sh
 ./tools/vnc/install-vnc.sh
 ./tools/jetbrains/install-jetbrains.sh
+./tools/ajenti/install-ajenti.sh
 
 # Clean after installs
 apt clean
