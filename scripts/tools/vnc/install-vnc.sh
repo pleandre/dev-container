@@ -2,11 +2,11 @@
 set -e
 
 # Install VNC
-echo "> Installing TigerVNC, NoVNC, XRDP"
+echo "> Installing TigerVNC, dbus-x11, noVNC, XRDP"
 space_before=$(df --output=avail / | tail -n 1)
 
-echo ">> Installing Tiger VNC"
-apt install -qq -y tigervnc-standalone-server
+echo ">> Installing Tiger VNC and dbus-x11"
+apt install -qq -y tigervnc-standalone-server dbus-x11
 
 echo ">> Installing No VNC Server: Web UI"
 # Download and extract files
@@ -74,5 +74,5 @@ redirect_stderr=true
 
 
 # Display install size
-echo "- Installation completed: TigerVNC, NoVNC, XRDP"
+echo "- Installation completed: TigerVNC, dbus-x11, noVNC, XRDP"
 echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"

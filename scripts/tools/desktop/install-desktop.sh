@@ -17,15 +17,22 @@ apt install -y -qq \
     xfce4-session \
     xfce4-settings \
     xfce4-terminal \
+    xfce4-taskmanager \
+    xfce4-screenshooter \
     xfconf \
     xfdesktop4 \
     xfwm4
 
-echo ">> Installing Chrome"
+echo ">> Installing Firefox"
+apt install -qq -y firefox-esr
+
+# Chrome has some stability issues
+# Firefox seems to be more stable in this setup (Docker, Debian 12, Xfce4, supervisord, VNC)
+# We add the repository in case you want to try: apt install -y -qq google-chrome-stable
+echo ">> Adding Chrome Repository"
 curl -fsSL "https://dl.google.com/linux/linux_signing_key.pub" | gpg --dearmor --yes -o /etc/apt/keyrings/google-chrome.gpg
 echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google-chrome.list
 apt update -qq
-apt install -y -qq google-chrome-stable
 
 echo ">> Installing One Password Desktop"
 apt install -qq -y 1password
@@ -58,6 +65,10 @@ startsecs=0
 exitcodes=0
 
 " >> /etc/supervisor/conf.d/supervisord.conf
+
+# Setup environment variables
+echo ">> Copy Desktop Environment Variables"
+cp /scripts/tools/desktop/desktop-env.sh /etc/profile.d/desktop-env.sh
 
 # Display install size
 echo "- Installation completed: Desktop (Xfce4, Chrome, Vs Code, One Password Desktop)"
