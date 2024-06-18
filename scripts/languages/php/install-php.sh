@@ -4,12 +4,10 @@ set -e
 echo "> Installing PHP"
 space_before=$(df --output=avail / | tail -n 1)
 
-
 echo ">> Installing PHP Requirements"
 apt install -y -qq \
 	ca-certificates \
 	apt-transport-https \
-	software-properties-common \
 	debian-archive-keyring \
 	lsb-release \
 	libpng-dev \
@@ -29,6 +27,7 @@ curl -fsSL "https://nginx.org/keys/nginx_signing.key" | gpg --dearmor --yes -o /
 echo "deb [signed-by=/etc/apt/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ ${DEBIAN_CODENAME} main" > /etc/apt/sources.list.d/php.list
 echo "deb [signed-by=/etc/apt/keyrings/nginx-archive-keyring.gpg] http://nginx.org/packages/debian ${DEBIAN_CODENAME} nginx" > /etc/apt/sources.list.d/nginx.list
 
+# Set up repository pinning to prefer our packages over distribution-provided ones
 echo -e "Package: *\nPin: origin nginx.org\nPin: release o=nginx\nPin-Priority: 900\n" | tee /etc/apt/preferences.d/99nginx
 
 # Install php and nginx
@@ -110,7 +109,6 @@ find /usr/share/nginx/www -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
 find /usr/share/nginx/www -type f -exec chmod u+rw,g+rw,o+r '{}' \;
 su -l $DEV_CONTAINER_USER /bin/bash -c "ln -s /usr/share/nginx/www /home/${DEV_CONTAINER_USER}/www"
 
-
 # Setup services
 echo ">> Create PHP-FPM and Nginx services"
 
@@ -131,7 +129,6 @@ stdout_logfile_maxbytes=0
 redirect_stderr=true
 
 " >> /etc/supervisor/conf.d/supervisord.conf
-
 
 # Display install size
 echo "- Installation completed: PHP and Nginx"
