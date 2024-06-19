@@ -20,5 +20,12 @@ else
   echo "DEV_USER_PASSWORD environment variable is not set."
 fi
 
+# We start supervisord web service
+echo "[inet_http_server]
+port=*:9001
+
+" > /etc/supervisor/conf.d/supervisord-web.conf
+
+
 # Run supervisord
 exec /usr/bin/supervisord --nodaemon
