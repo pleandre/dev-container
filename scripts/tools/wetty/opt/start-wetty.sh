@@ -6,5 +6,5 @@ source /etc/profile
 # Load node
 . ~/.nvm/nvm.sh
 
-# Start crontab ui
+# Start wetty ui
 exec wetty --port 7500

@@ -11,7 +11,7 @@ echo "deb [signed-by=/etc/apt/keyrings/debian-webmin-developers.gpg] https://dow
 apt update -qq
 
 echo ">> Installing webmin"
-apt-get install webmin --install-recommends
+apt install -qq -y webmin
 
 # Display install size
 echo "- Installation completed: webmin"

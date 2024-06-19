@@ -50,6 +50,9 @@ cp /scripts/tools/desktop/opt/* /opt/dev-container/desktop/
 mkdir -p /opt/dev-container/desktop/data/
 touch /opt/dev-container/desktop/data/installed-vscode-desktop-extensions.txt
 
+echo ">> Installing default vc code extensions"
+su -l $DEV_CONTAINER_USER /bin/bash -c "/opt/dev-container/desktop/install-vscode-desktop-extensions.sh"
+
 echo ">> Setup script to run on startup"
 echo "[program:desktop]
 environment=HOME=\"/home/${DEV_CONTAINER_USER}\"

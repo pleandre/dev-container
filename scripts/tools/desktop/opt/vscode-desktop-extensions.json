@@ -1,3 +1,58 @@
 {
-    "extensions": []
+    "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "GitHub.vscode-pull-request-github",
+        "GitHub.vscode-github-actions",
+        "eamodio.gitlens",
+
+        "ms-dotnettools.csdevkit",
+
+        "ms-dotnettools.vscode-dotnet-pack",
+
+        "ms-dotnettools.vscjava.vscode-maven",
+        "vscjava.vscode-java-pack",
+
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-toolsai.datawrangler",
+        "njpwerner.autodocstring",
+        "KevinRose.vsc-python-indent",
+
+        "VisualStudioExptTeam.vscodeintellicode",
+        "dbaeumer.vscode-eslint",
+        "leizongmin.node-module-intellisense",
+        "christian-kohler.npm-intellisense",
+
+        "ecmel.vscode-html-css",
+        "abusaidm.html-snippets",
+        "Zignd.html-css-class-completion",
+        "formulahendry.auto-close-tag",
+        "pranaygp.vscode-css-peek",
+
+        "ms-vscode.cpptools-extension-pack",
+        "jeff-hykin.better-cpp-syntax",
+
+        "rust-lang.rust-analyzer",
+        "vadimcn.vscode-lldb",
+
+        "emallin.phpunit",
+        "xdebug.php-pack",
+        "bmewburn.vscode-intelephense-client",
+
+        "golang.go",
+
+        "HashiCorp.terraform",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "esbenp.prettier-vscode",
+        "bierner.markdown-preview-github-styles",
+        "formulahendry.code-runner",
+        "ms-azuretools.vscode-docker",
+        "redhat.vscode-yaml",
+        "mikestead.dotenv",
+        "DavidAnson.vscode-markdownlint",
+        "EditorConfig.EditorConfig",
+        "mtxr.sqltools",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+    ]
 }
