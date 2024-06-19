@@ -38,6 +38,7 @@ apt update -qq
 ./tools/vnc/install-vnc.sh
 ./tools/jetbrains/install-jetbrains.sh
 ./tools/ajenti/install-ajenti.sh
+./tools/crontab-ui/install-crontab-ui.sh
 
 # Clean after installs
 apt clean
