@@ -39,6 +39,7 @@ apt update -qq
 ./tools/jetbrains/install-jetbrains.sh
 ./tools/ajenti/install-ajenti.sh
 ./tools/crontab-ui/install-crontab-ui.sh
+./tools/filebrowser/filebrowser.sh
 
 # Clean after installs
 apt clean
