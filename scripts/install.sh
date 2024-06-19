@@ -40,6 +40,7 @@ apt update -qq
 ./tools/ajenti/install-ajenti.sh
 ./tools/crontab-ui/install-crontab-ui.sh
 ./tools/filebrowser/filebrowser.sh
+./tools/wetty/wetty.sh
 
 # Clean after installs
 apt clean
