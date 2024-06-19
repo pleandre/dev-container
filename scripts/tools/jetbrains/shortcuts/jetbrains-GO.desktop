@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=GoLand
-Categories=Development,IDE
+Comment=Go Programming Language IDE
+Categories=Development;IDE;
+Keywords=jetbrains;goland;GO;GoLand;
 Exec=/opt/dev-container/jetbrains/scripts/goland.sh
 Icon=/opt/dev-container/jetbrains/icons/goland.png

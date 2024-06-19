@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=Rider
-Categories=Development,IDE
+Comment=.NET IDE
+Categories=Development;IDE;
+Keywords=jetbrains;rider;RD;Rider;
 Exec=/opt/dev-container/jetbrains/scripts/rider.sh
 Icon=/opt/dev-container/jetbrains/icons/rider.png

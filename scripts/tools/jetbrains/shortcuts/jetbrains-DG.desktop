@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=DataGrip
-Categories=Development,IDE
+Comment=IDE for Databases & SQL
+Categories=Development;IDE;
+Keywords=jetbrains;datagrip;DG;DataGrip;
 Exec=/opt/dev-container/jetbrains/scripts/datagrip.sh
 Icon=/opt/dev-container/jetbrains/icons/datagrip.png

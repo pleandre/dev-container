@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=WebStorm
-Categories=Development,IDE
+Comment=JavaScript and TypeScript IDE
+Categories=Development;IDE;
+Keywords=jetbrains;webstorm;WS;WebStorm;
 Exec=/opt/dev-container/jetbrains/scripts/webstorm.sh
 Icon=/opt/dev-container/jetbrains/icons/webstorm.png

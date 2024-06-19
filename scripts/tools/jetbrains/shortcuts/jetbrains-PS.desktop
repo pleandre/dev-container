@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=PhpStorm
-Categories=Development,IDE
+Comment=PHP IDE by JetBrains
+Categories=Development;IDE;
+Keywords=jetbrains;phpstorm;PS;PhpStorm;
 Exec=/opt/dev-container/jetbrains/scripts/phpstorm.sh
 Icon=/opt/dev-container/jetbrains/icons/phpstorm.png

@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=PyCharm Professional Edition
-Categories=Development,IDE
+Comment=Python IDE for data science and web development
+Categories=Development;IDE;
+Keywords=jetbrains;pycharm;PCP;PyCharm Professional Edition;
 Exec=/opt/dev-container/jetbrains/scripts/pycharm.sh
 Icon=/opt/dev-container/jetbrains/icons/pycharm.png

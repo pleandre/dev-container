@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=IntelliJ IDEA Community Edition
-Categories=Development,IDE
+Comment=Java and Kotlin IDE
+Categories=Development;IDE;
+Keywords=jetbrains;idea;IIC;IntelliJ IDEA Community Edition;
 Exec=/opt/dev-container/jetbrains/scripts/idea-ce.sh
 Icon=/opt/dev-container/jetbrains/icons/idea-ce.png

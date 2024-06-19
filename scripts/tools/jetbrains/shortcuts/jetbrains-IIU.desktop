@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=IntelliJ IDEA Ultimate
-Categories=Development,IDE
+Comment=Java and Kotlin IDE
+Categories=Development;IDE;
+Keywords=jetbrains;idea;IIU;IntelliJ IDEA Ultimate;
 Exec=/opt/dev-container/jetbrains/scripts/idea.sh
 Icon=/opt/dev-container/jetbrains/icons/idea.png

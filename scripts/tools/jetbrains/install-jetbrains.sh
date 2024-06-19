@@ -3,6 +3,9 @@ set -e
 
 echo "> Installing JetBrains Scripts, Icons and Shortcuts"
 
+# Install Zenity to display alerts and info dialog in the startup / installation scripts
+apt install -qq -y zenity
+
 # Create script folder
 mkdir -p /opt/dev-container/jetbrains/scripts/
 

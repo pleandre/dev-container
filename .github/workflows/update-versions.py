@@ -269,17 +269,17 @@ def render_jinja_template(template_path, context, output_file):
 jetbrains_changed = False
 try:
     jetbrains_products = [
-        { 'code': 'PS', 'name': 'PhpStorm', 'icon': 'phpstorm.png', 'bin': 'phpstorm.sh', 'script': 'phpstorm.sh' },
-        { 'code': 'DG', 'name': 'DataGrip', 'icon': 'datagrip.png', 'bin': 'datagrip.sh', 'script': 'datagrip.sh' },
-        { 'code': 'GO', 'name': 'GoLand', 'icon': 'goland.png', 'bin': 'goland.sh', 'script': 'goland.sh' },
-        { 'code': 'CL', 'name': 'CLion', 'icon': 'clion.png', 'bin': 'clion.sh', 'script': 'clion.sh' },
-        { 'code': 'RD', 'name': 'Rider', 'icon': 'rider.png', 'bin': 'rider.sh', 'script': 'rider.sh' },
-        { 'code': 'IIU', 'name': 'IntelliJ IDEA Ultimate', 'icon': 'idea.png', 'bin': 'idea.sh', 'script': 'idea.sh' },
-        { 'code': 'IIC', 'name': 'IntelliJ IDEA Community Edition', 'icon': 'idea-ce.png', 'bin': 'idea.sh', 'script': 'idea-ce.sh' },
-        { 'code': 'PCP', 'name': 'PyCharm Professional Edition', 'icon': 'pycharm.png', 'bin': 'pycharm.sh', 'script': 'pycharm.sh' },
-        { 'code': 'PCC', 'name': 'PyCharm Community Edition', 'icon': 'pycharm-ce.png', 'bin': 'pycharm.sh', 'script': 'pycharm-ce.sh' },
-        { 'code': 'WS', 'name': 'WebStorm', 'icon': 'webstorm.png', 'bin': 'webstorm.sh', 'script': 'webstorm.sh' },
-        { 'code': 'RR', 'name': 'RustRover', 'icon': 'rustrover.png', 'bin': 'rustrover.sh', 'script': 'rustrover.sh' }
+        { 'code': 'PS', 'name': 'PhpStorm', 'icon': 'phpstorm.png', 'bin': 'phpstorm.sh', 'script': 'phpstorm.sh', 'shortname': 'phpstorm', 'description': 'PHP IDE by JetBrains' },
+        { 'code': 'DG', 'name': 'DataGrip', 'icon': 'datagrip.png', 'bin': 'datagrip.sh', 'script': 'datagrip.sh', 'shortname': 'datagrip', 'description': 'IDE for Databases & SQL' },
+        { 'code': 'GO', 'name': 'GoLand', 'icon': 'goland.png', 'bin': 'goland.sh', 'script': 'goland.sh', 'shortname': 'goland', 'description': 'Go Programming Language IDE' },
+        { 'code': 'CL', 'name': 'CLion', 'icon': 'clion.png', 'bin': 'clion.sh', 'script': 'clion.sh', 'shortname': 'clion', 'description': 'IDE for C and C++' },
+        { 'code': 'RD', 'name': 'Rider', 'icon': 'rider.png', 'bin': 'rider.sh', 'script': 'rider.sh', 'shortname': 'rider', 'description': '.NET IDE' },
+        { 'code': 'IIU', 'name': 'IntelliJ IDEA Ultimate', 'icon': 'idea.png', 'bin': 'idea.sh', 'script': 'idea.sh', 'shortname': 'idea', 'description': 'Java and Kotlin IDE' },
+        { 'code': 'IIC', 'name': 'IntelliJ IDEA Community Edition', 'icon': 'idea-ce.png', 'bin': 'idea.sh', 'script': 'idea-ce.sh', 'shortname': 'idea', 'description': 'Java and Kotlin IDE' },
+        { 'code': 'PCP', 'name': 'PyCharm Professional Edition', 'icon': 'pycharm.png', 'bin': 'pycharm.sh', 'script': 'pycharm.sh', 'shortname': 'pycharm', 'description': 'Python IDE for data science and web development' },
+        { 'code': 'PCC', 'name': 'PyCharm Community Edition', 'icon': 'pycharm-ce.png', 'bin': 'pycharm.sh', 'script': 'pycharm-ce.sh', 'shortname': 'pycharm', 'description': 'Python IDE for data science and web development' },
+        { 'code': 'WS', 'name': 'WebStorm', 'icon': 'webstorm.png', 'bin': 'webstorm.sh', 'script': 'webstorm.sh', 'shortname': 'webstorm', 'description': 'JavaScript and TypeScript IDE' },
+        { 'code': 'RR', 'name': 'RustRover', 'icon': 'rustrover.png', 'bin': 'rustrover.sh', 'script': 'rustrover.sh', 'shortname': 'rustrover', 'description': 'IDE for Rust developers' }
     ]
     jetbrains_product_codes = ",".join([product['code'] for product in jetbrains_products])
     jetbrains_release_urls = "https://data.services.jetbrains.com/products/releases?code=" + jetbrains_product_codes + "&latest=true&type=release"

@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=PyCharm Community Edition
-Categories=Development,IDE
+Comment=Python IDE for data science and web development
+Categories=Development;IDE;
+Keywords=jetbrains;pycharm;PCC;PyCharm Community Edition;
 Exec=/opt/dev-container/jetbrains/scripts/pycharm-ce.sh
 Icon=/opt/dev-container/jetbrains/icons/pycharm-ce.png

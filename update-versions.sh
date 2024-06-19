@@ -11,4 +11,5 @@ docker run \
   -v "$(pwd)"/.env:/workspace/.env \
   -v "$(pwd)"/scripts/tools/jupyter-lab/:/workspace/scripts/tools/jupyter-lab/ \
   -v "$(pwd)"/.github/workflows/update-versions.py:/workspace/update-versions.py \
+  -v "$(pwd)"/scripts/tools/jetbrains/:/workspace/scripts/tools/jetbrains/ \
   update-version

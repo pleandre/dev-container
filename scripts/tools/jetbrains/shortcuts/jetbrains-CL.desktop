@@ -1,6 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=CLion
-Categories=Development,IDE
+Comment=IDE for C and C++
+Categories=Development;IDE;
+Keywords=jetbrains;clion;CL;CLion;
 Exec=/opt/dev-container/jetbrains/scripts/clion.sh
 Icon=/opt/dev-container/jetbrains/icons/clion.png

@@ -60,6 +60,16 @@ stdout_logfile=/dev/fd/1
 stdout_logfile_maxbytes=0
 redirect_stderr=true
 
+[program:rdp-sesman]
+command=bash -c '/opt/dev-container/vnc/rdp-sesman-start.sh'
+directory=/home/
+user=root
+autostart=true
+autorestart=true
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
+
 [program:rdp]
 command=bash -c '/opt/dev-container/vnc/rdp-start.sh'
 directory=/home/

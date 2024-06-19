@@ -8,4 +8,5 @@ REM Run the Docker container with the necessary volumes mounted
 docker run -v "%cd%\.env":/workspace/.env ^
            -v "%cd%\scripts\tools\jupyter-lab/":/workspace/scripts/tools/jupyter-lab/ ^
            -v "%cd%\.github\workflows\update-versions.py":/workspace/update-versions.py ^
+           -v "%cd%\scripts\tools\jetbrains/":/workspace/scripts/tools/jetbrains/ ^
            update-version
