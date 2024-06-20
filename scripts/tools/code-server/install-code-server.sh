@@ -14,6 +14,11 @@ mkdir -p /opt/dev-container/code-server/data/
 touch /opt/dev-container/code-server/data/installed-extensions.txt
 source /etc/profile
 
+echo ">> Set /opt/dev-container/code-server/ access rights"
+chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /opt/dev-container/code-server/
+find /opt/dev-container/code-server/ -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
+find /opt/dev-container/code-server/ -type f -exec chmod u+rw,g+rw,o+r '{}' \;
+
 mkdir -p /home/${DEV_CONTAINER_USER}/projects
 
 echo ">> Installing code-server"

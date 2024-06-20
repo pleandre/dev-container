@@ -50,6 +50,11 @@ cp /scripts/tools/desktop/opt/* /opt/dev-container/desktop/
 mkdir -p /opt/dev-container/desktop/data/
 touch /opt/dev-container/desktop/data/installed-vscode-desktop-extensions.txt
 
+echo ">> Set /opt/dev-container/desktop/ access rights"
+chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /opt/dev-container/desktop/
+find /opt/dev-container/desktop/ -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
+find /opt/dev-container/desktop/ -type f -exec chmod u+rw,g+rw,o+r '{}' \;
+
 echo ">> Installing default vc code extensions"
 su -l $DEV_CONTAINER_USER /bin/bash -c "/opt/dev-container/desktop/install-vscode-desktop-extensions.sh"
 
