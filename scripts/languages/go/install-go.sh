@@ -3,7 +3,7 @@ set -e
 
 # Install go
 echo "> Installing Go"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 wget "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" -O /tmp/go.linux-amd64.tar.gz -q
 tar -C /usr/local -xzf "/tmp/go.linux-amd64.tar.gz"
@@ -23,4 +23,4 @@ cp /scripts/languages/go/go-env.sh /etc/profile.d/go-env.sh
 
 # Display install size
 echo "- Installation completed: go"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

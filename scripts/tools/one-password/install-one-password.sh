@@ -3,7 +3,7 @@ set -e
 
 # Install One Password CLI
 echo "> Installing One Password CLI"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 # Add the key for the 1Password apt repository
 curl -fsSL "https://downloads.1password.com/linux/keys/1password.asc" | gpg --dearmor --yes -o /usr/share/keyrings/1password-archive-keyring.gpg
@@ -26,4 +26,4 @@ op --version
 
 # Display install size
 echo "- Installation completed: One Password CLI"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

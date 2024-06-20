@@ -3,7 +3,7 @@ set -e
 
 # Install filebrowser
 echo "> Installing filebrowser"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 curl -fsSL https://raw.githubusercontent.com/filebrowser/get/master/get.sh | bash
 
@@ -25,5 +25,5 @@ redirect_stderr=true
 " >> /etc/supervisor/conf.d/supervisord.conf
 
 # Display install size
-echo "- Installation completed: crontab-ui"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "- Installation completed: filebrowser"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

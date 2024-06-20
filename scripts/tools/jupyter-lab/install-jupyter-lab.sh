@@ -3,7 +3,7 @@ set -e
 
 # Install Jupyterlab
 echo "> Installing JupyterLab"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate ${CONDA_ENV} && pip install -r /scripts/tools/jupyter-lab/requirements-conda-dev.txt"
 
@@ -59,8 +59,9 @@ echo ">> Add Jupyter Bash support"
 su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate ${CONDA_ENV} && pip install bash_kernel && python -m bash_kernel.install"
 
 # Add C++ support: https://github.com/jupyter-xeus/xeus-cling
-echo ">> Add Jupyter C++ support"
-su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate ${CONDA_ENV} && conda install xeus-cling -c conda-forge -y"
+# Too large: around 2.8GB, removed for now
+#echo ">> Add Jupyter C++ support"
+#su -l $DEV_CONTAINER_USER /bin/bash -c "source ~/.miniconda3/bin/activate ${CONDA_ENV} && conda install xeus-cling -c conda-forge -y"
 
 # Add Javascript Typescript support: https://github.com/yunabe/tslab
 echo ">> Add Typescript support"
@@ -88,4 +89,4 @@ su -l $DEV_CONTAINER_USER /bin/bash -c "source /etc/profile && source ~/.minicon
 
 # Display install size
 echo "- Installation completed: JupyterLab"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

@@ -3,7 +3,7 @@ set -e
 
 # Install docker
 echo "> Installing docker"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 apt install -y -qq \
 	apt-transport-https \
@@ -23,4 +23,4 @@ apt install -y -qq docker-ce-cli
 
 # Display install size
 echo "- Installation completed: docker"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

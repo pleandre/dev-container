@@ -2,8 +2,8 @@
 set -e
 
 # Install Desktop
-echo "> Installing Desktop: Xfce4, Chrome, Vs Code, One Password Desktop"
-space_before=$(df --output=avail / | tail -n 1)
+echo "> Installing Desktop: Xfce4, Firefox, Vs Code, One Password Desktop"
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 # Install Xfse4 Desktop - Minimal Installation
 # See: https://github.com/coonrad/Debian-Xfce4-Minimal-Install
@@ -79,5 +79,5 @@ echo ">> Copy Desktop Environment Variables"
 cp /scripts/tools/desktop/desktop-env.sh /etc/profile.d/desktop-env.sh
 
 # Display install size
-echo "- Installation completed: Desktop (Xfce4, Chrome, Vs Code, One Password Desktop)"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "- Installation completed: Desktop (Xfce4, Firefox, Vs Code, One Password Desktop)"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

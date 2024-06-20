@@ -2,7 +2,7 @@
 set -e
 
 echo "> Installing cloud tools"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 # Install gcloud cli
 # See: https://cloud.google.com/sdk/docs/install#deb
@@ -64,4 +64,4 @@ apt install -y -qq terraform
 
 # Display install size
 echo "- Installation completed: cloud tools"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

@@ -5,7 +5,7 @@ set -e
 # See: https://docs.ajenti.org/en/latest/man/install.html#installing
 # See: https://github.com/ajenti/ajenti/blob/master/scripts/install.sh
 echo "> Install Ajenti"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 apt install -y -qq build-essential python3-venv python3-pip python3-dev python3-lxml libssl-dev python3-dbus python3-augeas python3-apt ntpdate
 
@@ -85,4 +85,4 @@ redirect_stderr=true
 
 # Display install size
 echo "- Installation completed: Ajenti"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

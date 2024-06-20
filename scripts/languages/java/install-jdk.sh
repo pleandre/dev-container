@@ -3,7 +3,7 @@ set -e
 
 # Download JDK
 echo "> Installing JDK"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 wget $JDK_DOWNLOAD_URL -O /tmp/openjdk-linux-x64_bin.tar.gz -q
 tar -C /tmp -xf /tmp/openjdk-linux-x64_bin.tar.gz
@@ -40,4 +40,4 @@ chmod +x /etc/profile.d/java-env.sh
 
 # Display install size
 echo "- Installation completed: Java and Maven"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

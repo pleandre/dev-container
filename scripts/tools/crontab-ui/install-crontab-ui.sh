@@ -3,7 +3,7 @@ set -e
 
 # Install crontab-ui
 echo "> Installing crontab-ui"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 echo ">> Installing cron"
 apt install -qq -y cron
@@ -30,4 +30,4 @@ redirect_stderr=true
 
 # Display install size
 echo "- Installation completed: crontab-ui"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

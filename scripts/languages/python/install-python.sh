@@ -3,7 +3,7 @@ set -e
 
 # Install Miniconda
 echo "> Installing Miniconda"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 su -l $DEV_CONTAINER_USER /bin/bash -c "mkdir -p ~/.miniconda3"
 su -l $DEV_CONTAINER_USER /bin/bash -c "wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O  ~/.miniconda3/miniconda.sh"
@@ -34,4 +34,4 @@ cp /scripts/languages/python/python-env.sh /etc/profile.d/python-env.sh
 
 # Display install size
 echo "- Installation completed: Conda, Python, Pip Tools"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

@@ -3,7 +3,7 @@ set -e
 
 # Install NVM
 echo "> Installing NVM"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 su -l $DEV_CONTAINER_USER /bin/bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_VERSION}/install.sh | bash"
 
@@ -25,4 +25,4 @@ cp /scripts/languages/node-js/node-env.sh /etc/profile.d/node-env.sh
 
 # Display install size
 echo "- Installation completed: NVM, Node, Corepack"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

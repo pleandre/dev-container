@@ -2,7 +2,7 @@
 set -e
 
 echo "> Installing PHP"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 echo ">> Installing PHP Requirements"
 apt install -y -qq \
@@ -132,4 +132,4 @@ redirect_stderr=true
 
 # Display install size
 echo "- Installation completed: PHP and Nginx"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

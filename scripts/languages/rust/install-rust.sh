@@ -2,7 +2,7 @@
 set -e
 
 echo "> Installing Rust"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 echo ">> Installing Rust Dependencies"
 apt install -y -qq \
@@ -30,4 +30,4 @@ cp /scripts/languages/rust/rust-env.sh /etc/profile.d/rust-env.sh
 
 # Display install size
 echo "- Installation completed: Rust"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

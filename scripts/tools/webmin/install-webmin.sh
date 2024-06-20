@@ -3,7 +3,7 @@ set -e
 
 # Install webmin
 echo "> Installing webmin"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 echo ">> Adding webmin repository"
 curl -fsSL "https://download.webmin.com/developers-key.asc" | gpg --dearmor --yes -o /etc/apt/keyrings/debian-webmin-developers.gpg
@@ -15,4 +15,4 @@ apt install -qq -y webmin
 
 # Display install size
 echo "- Installation completed: webmin"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"

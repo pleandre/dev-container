@@ -3,7 +3,7 @@ set -e
 
 # Install Code Server
 echo "> Installing code-server"
-space_before=$(df --output=avail / | tail -n 1)
+space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 echo ">> Copying code-server environment variables and startup scripts"
 mkdir -p /opt/dev-container/code-server/
@@ -53,4 +53,4 @@ git config --global --add safe.directory '*'
 
 # Display install size
 echo "- Installation completed: code server"
-echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / | tail -n 1) )))"
+echo "> Space used: $(numfmt --to=iec $(( space_before - $(df --output=avail / --block-size=1 | tail -n 1) )))"
