@@ -7,8 +7,8 @@ space_before=$(df --output=avail / --block-size=1 | tail -n 1)
 
 # Install Xfse4 Desktop - Minimal Installation
 # See: https://github.com/coonrad/Debian-Xfce4-Minimal-Install
-# Need dbus-x11 to work with TigerVNC
 echo ">> Installing Xfse4 Desktop"
+space_before_cmd=$(df --output=avail / --block-size=1 | tail -n 1)
 apt install -y -qq \
     libxfce4ui-utils \
     thunar \
@@ -22,9 +22,12 @@ apt install -y -qq \
     xfconf \
     xfdesktop4 \
     xfwm4
+echo ">> Installed Xfse4 Desktop: $(numfmt --to=iec $(( space_before_cmd - $(df --output=avail / --block-size=1 | tail -n 1) )))"
 
 echo ">> Installing Firefox"
+space_before_cmd=$(df --output=avail / --block-size=1 | tail -n 1)
 apt install -qq -y firefox-esr
+echo ">> Installed firefox: $(numfmt --to=iec $(( space_before_cmd - $(df --output=avail / --block-size=1 | tail -n 1) )))"
 
 # Chrome has some stability issues
 # Firefox seems to be more stable in this setup (Docker, Debian 12, Xfce4, supervisord, VNC)
@@ -35,13 +38,17 @@ echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.g
 apt update -qq
 
 echo ">> Installing One Password Desktop"
+space_before_cmd=$(df --output=avail / --block-size=1 | tail -n 1)
 apt install -qq -y 1password
+echo ">> Installed One Password Desktop: $(numfmt --to=iec $(( space_before_cmd - $(df --output=avail / --block-size=1 | tail -n 1) )))"
 
 echo ">> Installing VsCode"
+space_before_cmd=$(df --output=avail / --block-size=1 | tail -n 1)
 curl -fsSL "https://packages.microsoft.com/keys/microsoft.asc" | gpg --dearmor --yes -o /etc/apt/keyrings/packages.microsoft.gpg
 echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list
 apt update -qq
 apt install -y -qq code
+echo ">> Installed VsCode Desktop: $(numfmt --to=iec $(( space_before_cmd - $(df --output=avail / --block-size=1 | tail -n 1) )))"
 
 echo ">> Copying vscode script to install extensions and startup scripts"
 mkdir -p /opt/dev-container/desktop/
@@ -55,8 +62,10 @@ chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /opt/dev-container/de
 find /opt/dev-container/desktop/ -type d -exec chmod u+rwx,g+rwx,o+rx '{}' \;
 find /opt/dev-container/desktop/ -type f -exec chmod u+rw,g+rw,o+r '{}' \;
 
-echo ">> Installing default vc code extensions"
+echo ">> Installing default vscode extensions"
+space_before_cmd=$(df --output=avail / --block-size=1 | tail -n 1)
 su -l $DEV_CONTAINER_USER /bin/bash -c "/opt/dev-container/desktop/install-vscode-desktop-extensions.sh"
+echo ">> Installed default vscode extensions: $(numfmt --to=iec $(( space_before_cmd - $(df --output=avail / --block-size=1 | tail -n 1) )))"
 
 echo ">> Setup script to run on startup"
 echo "[program:desktop]
