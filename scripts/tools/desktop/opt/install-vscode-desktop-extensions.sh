@@ -20,11 +20,13 @@ if [ -f "$EXTENSIONS" ]; then
     for extension in "${extensions[@]}"; do
         if ! grep -Fxq "$extension" "$INSTALLED_EXTENSIONS"; then
             echo ">> Adding extension: $extension"
+            space_before_cmd=$(df --output=avail / --block-size=1 | tail -n 1)
             if code --install-extension "$extension"; then
                 echo "$extension" >> "$INSTALLED_EXTENSIONS"
             else
                 echo "Failed to install extension: $extension"
             fi
+            echo ">> Installed extension '${extension}': $(numfmt --to=iec $(( space_before_cmd - $(df --output=avail / --block-size=1 | tail -n 1) )))"
         fi
     done
 fi
