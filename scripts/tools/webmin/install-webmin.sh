@@ -11,7 +11,27 @@ echo "deb [signed-by=/etc/apt/keyrings/debian-webmin-developers.gpg] https://dow
 apt update -qq
 
 echo ">> Installing webmin"
-apt install -qq -y webmin
+apt install -qq -y webmin net-tools
+
+echo ">> Copying webmin startup scripts"
+mkdir -p /opt/dev-container/webmin/
+cp /scripts/tools/webmin/opt/* /opt/dev-container/webmin/
+
+# Setup service
+echo ">> Creating Webmin service config in Supervisord"
+
+echo "[program:webmin]
+command=bash -c '/opt/dev-container/webmin/webmin-start.sh'
+directory=/home/
+user=root
+autostart=true
+autorestart=true
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
+
+" >> /etc/supervisor/conf.d/supervisord.conf
+
 
 # Display install size
 echo "- Installation completed: webmin"

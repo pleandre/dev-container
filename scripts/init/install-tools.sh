@@ -31,6 +31,7 @@ apt install -y -qq dos2unix \
 	procps \
 	sudo \
 	ca-certificates \
+	net-tools \
 	zsh \
 	lsb-release 
 
