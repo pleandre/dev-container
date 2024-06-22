@@ -47,9 +47,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.130
+boto3==1.34.131
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.130
+botocore==1.34.131
     # via
     #   boto3
     #   s3transfer
@@ -139,7 +139,7 @@ idna==3.7
     #   jsonschema
     #   requests
     #   yarl
-importlib-metadata==7.1.0
+importlib-metadata==7.2.0
     # via yapf
 ipykernel==6.29.4
     # via jupyterlab
