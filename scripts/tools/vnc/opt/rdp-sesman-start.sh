@@ -4,4 +4,4 @@
 source /etc/profile
 
 # Run XRDP
-exec usr/sbin/xrdp-sesman --nodaemon
+exec /usr/sbin/xrdp-sesman --nodaemon
