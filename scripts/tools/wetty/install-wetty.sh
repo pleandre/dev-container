@@ -12,9 +12,15 @@ echo ">> Copying wetty startup scripts"
 mkdir -p /opt/dev-container/wetty/
 cp /scripts/tools/wetty/opt/* /opt/dev-container/wetty/
 
+echo ">> Create Wetty log folder"
+mkdir -p /var/log/wetty
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /var/log/wetty
+chmod -R 775 /var/log/wetty
+
 echo ">> Add wetty as a supervisord service"
 echo "[program:wetty-web-shell]
 command=bash -c '/opt/dev-container/wetty/start-wetty.sh'
+environment=HOME=\"/home/${DEV_CONTAINER_USER}\"
 directory=/home/${DEV_CONTAINER_USER}/
 user=dev-user
 autostart=true

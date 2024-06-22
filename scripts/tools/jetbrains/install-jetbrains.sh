@@ -21,6 +21,7 @@ chmod -R 775 /usr/share/applications/
 mkdir -p /opt/dev-container/jetbrains/icons/
 cp /scripts/tools/jetbrains/icons/* /opt/dev-container/jetbrains/icons/
 chmod -R 664 /opt/dev-container/jetbrains/icons/
+chmod 775 /opt/dev-container/jetbrains/icons/
 
 # Copy environment variables (add /opt/dev-container/jetbrains/scripts/ to the path)
 echo ">> Copy JetBrains Environment Variables"
