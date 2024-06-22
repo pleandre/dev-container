@@ -1,13 +1,36 @@
 #!/bin/bash
 
-# Load environment variables
-source /etc/profile
+LOG_FILE="/var/log/crontab-ui/wetty.log"
+
+# Log and load environment variables
+. /etc/profile
+if [ $? -ne 0 ]; then
+    echo "Failed to source /etc/profile" > $LOG_FILE
+    exit 1
+fi
 
 # Load node
-. ~/.nvm/nvm.sh
+. "${HOME}/.nvm/nvm.sh"
+if [ $? -ne 0 ]; then
+    echo "Failed to source nvm.sh" > $LOG_FILE
+    exit 1
+fi
+
+# Check if wetty is installed
+which crontab-ui >> $LOG_FILE 2>&1
+if [ $? -ne 0 ]; then
+    echo "crontab-ui not found in PATH" > $LOG_FILE
+    exit 1
+fi
+
+# Start crontab ui
+echo "Starting crontab-ui" > $LOG_FILE
 
 export HOST=0.0.0.0
 export PORT=8500 
 
-# Start crontab ui
-exec crontab-ui
+crontab-ui >> $LOG_FILE 2>&1
+if [ $? -ne 0 ]; then
+    echo "Failed to start crontab-ui" >> $LOG_FILE
+    exit 1
+fi

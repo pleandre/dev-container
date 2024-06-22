@@ -1,6 +1,5 @@
 #!/bin/bash
 
-mkdir -p /var/log/wetty
 LOG_FILE="/var/log/wetty/wetty.log"
 
 # Log and load environment variables

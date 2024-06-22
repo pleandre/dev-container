@@ -15,9 +15,15 @@ echo ">> Copying crontab-ui startup scripts"
 mkdir -p /opt/dev-container/crontab-ui/
 cp /scripts/tools/crontab-ui/opt/* /opt/dev-container/crontab-ui/
 
+echo ">> Create crontab-ui log folder"
+mkdir -p /var/log/crontab-ui
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /var/log/crontab-ui
+chmod -R 775 /var/log/crontab-ui
+
 echo ">> Add Crontab UI as a supervisord service"
 echo "[program:crontab-ui]
 command=bash -c '/opt/dev-container/crontab-ui/start-crontab-ui.sh'
+environment=HOME=\"/home/${DEV_CONTAINER_USER}\"
 directory=/home/${DEV_CONTAINER_USER}/
 user=dev-user
 autostart=true
