@@ -139,7 +139,7 @@ idna==3.7
     #   jsonschema
     #   requests
     #   yarl
-importlib-metadata==7.2.0
+importlib-metadata==7.2.1
     # via yapf
 ipykernel==6.29.4
     # via jupyterlab
