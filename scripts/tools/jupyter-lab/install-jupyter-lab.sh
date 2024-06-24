@@ -33,6 +33,9 @@ directory=/home/${DEV_CONTAINER_USER}/jupyter
 user=${DEV_CONTAINER_USER}
 autostart=true
 autorestart=true
+stopwaitsecs=3
+stopasgroup=true
+killasgroup=true
 ; Logs to container output
 stdout_logfile=/dev/fd/1
 stdout_logfile_maxbytes=0
