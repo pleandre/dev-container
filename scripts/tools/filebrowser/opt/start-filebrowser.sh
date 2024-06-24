@@ -19,7 +19,7 @@ fi
 # Start filebrowser
 echo "Starting filebrowser" > $LOG_FILE
 
-filebrowser -r / -p 7000 --noauth >> $LOG_FILE 2>&1
+filebrowser -r / -p 7000 --address 0.0.0.0 --noauth >> $LOG_FILE 2>&1
 if [ $? -ne 0 ]; then
     echo "Failed to start filebrowser" >> $LOG_FILE
     exit 1
