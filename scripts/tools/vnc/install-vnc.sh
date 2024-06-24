@@ -50,8 +50,18 @@ cp /scripts/tools/vnc/opt/* /opt/dev-container/vnc/
 # Setup service
 echo ">> Creating VNC and RDP services config in Supervisord"
 
-echo "[program:vnc]
-command=bash -c '/opt/dev-container/vnc/vnc-start.sh'
+echo "[program:vnc-novnc]
+command=bash -c '/opt/dev-container/vnc/vnc-novnc-webui-start.sh'
+directory=/home/${DEV_CONTAINER_USER}/
+user=${DEV_CONTAINER_USER}
+autostart=true
+autorestart=true
+stdout_logfile=/dev/fd/1
+stdout_logfile_maxbytes=0
+redirect_stderr=true
+
+[program:vnc-tigervnc]
+command=bash -c '/opt/dev-container/vnc/vnc-tigervnc-start.sh'
 directory=/home/${DEV_CONTAINER_USER}/
 user=${DEV_CONTAINER_USER}
 autostart=true
