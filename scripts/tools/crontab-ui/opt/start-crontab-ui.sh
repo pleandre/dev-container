@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG_FILE="/var/log/crontab-ui/wetty.log"
+LOG_FILE="/var/log/crontab-ui/crontab-ui.log"
 
 # Log and load environment variables
 . /etc/profile
@@ -16,7 +16,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-# Check if wetty is installed
+# Check if crontab-ui is installed
 which crontab-ui >> $LOG_FILE 2>&1
 if [ $? -ne 0 ]; then
     echo "crontab-ui not found in PATH" > $LOG_FILE

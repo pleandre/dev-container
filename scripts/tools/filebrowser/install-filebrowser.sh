@@ -11,6 +11,12 @@ echo ">> Copying filebrowser startup scripts"
 mkdir -p /opt/dev-container/filebrowser/
 cp /scripts/tools/filebrowser/opt/* /opt/dev-container/filebrowser/
 
+echo ">> Create filebrowser log folder"
+mkdir -p /var/log/filebrowser
+sudo chown -R ${DEV_CONTAINER_USER}:${DEV_CONTAINER_USER_GROUP} /var/log/filebrowser
+chmod -R 775 /var/log/filebrowser
+
+
 echo ">> Add filebrowser as a supervisord service"
 echo "[program:filebrowser]
 command=bash -c '/opt/dev-container/filebrowser/start-filebrowser.sh'
