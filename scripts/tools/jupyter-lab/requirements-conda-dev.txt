@@ -47,9 +47,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.131
+boto3==1.34.132
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.131
+botocore==1.34.132
     # via
     #   boto3
     #   s3transfer
@@ -443,11 +443,11 @@ rpds-py==0.18.1
     # via
     #   jsonschema
     #   referencing
-s3transfer==0.10.1
+s3transfer==0.10.2
     # via boto3
 scikit-learn==1.5.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-scipy==1.13.1
+scipy==1.14.0
     # via scikit-learn
 send2trash==1.8.3
     # via jupyter-server
