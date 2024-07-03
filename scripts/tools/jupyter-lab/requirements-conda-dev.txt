@@ -47,9 +47,9 @@ black==24.4.2
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach==6.1.0
     # via nbconvert
-boto3==1.34.137
+boto3==1.34.138
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.34.137
+botocore==1.34.138
     # via
     #   boto3
     #   s3transfer
@@ -294,7 +294,7 @@ numpy==2.0.0
     #   scipy
 optree==0.11.0
     # via keras
-orjson==3.10.5
+orjson==3.10.6
     # via fastapi
 overrides==7.7.0
     # via jupyter-server
