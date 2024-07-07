@@ -292,7 +292,7 @@ numpy==2.0.0
     #   pandas
     #   scikit-learn
     #   scipy
-optree==0.12.0
+optree==0.12.1
     # via keras
 orjson==3.10.6
     # via fastapi
