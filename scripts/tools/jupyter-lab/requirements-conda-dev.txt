@@ -225,7 +225,7 @@ jupyterlab-lsp==5.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 jupyterlab-pygments==0.3.0
     # via nbconvert
-jupyterlab-server==2.27.2
+jupyterlab-server==2.27.3
     # via jupyterlab
 keras==3.4.1
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
