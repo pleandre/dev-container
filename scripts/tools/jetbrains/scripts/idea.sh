@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="IntelliJ IDEA Ultimate"
-DOWNLOAD_URL="https://download.jetbrains.com/idea/ideaIU-2024.1.4.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/idea/ideaIU-2024.3.2.tar.gz"
 PRODUCT_CODE="IIU"
 BIN_FILE="idea.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
