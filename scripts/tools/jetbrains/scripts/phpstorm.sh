@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="PhpStorm"
-DOWNLOAD_URL="https://download.jetbrains.com/webide/PhpStorm-2024.1.4.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/webide/PhpStorm-2024.3.2.tar.gz"
 PRODUCT_CODE="PS"
 BIN_FILE="phpstorm.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
