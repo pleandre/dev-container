@@ -48,9 +48,9 @@ black==24.10.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach[css]==6.2.0
     # via nbconvert
-boto3==1.36.3
+boto3==1.36.4
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.36.3
+botocore==1.36.4
     # via
     #   boto3
     #   s3transfer
@@ -85,9 +85,9 @@ dill==0.3.9
     # via pylint
 docstring-to-markdown==0.15
     # via python-lsp-server
-executing==2.1.0
+executing==2.2.0
     # via stack-data
-fastapi==0.115.6
+fastapi==0.115.7
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 fastjsonschema==2.21.1
     # via nbformat
@@ -444,7 +444,7 @@ sqlalchemy==2.0.37
     # via jupyter-scheduler
 stack-data==0.6.3
     # via ipython
-starlette==0.41.3
+starlette==0.45.2
     # via fastapi
 terminado==0.18.1
     # via
