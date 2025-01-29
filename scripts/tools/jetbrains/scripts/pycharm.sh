@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="PyCharm Professional Edition"
-DOWNLOAD_URL="https://download.jetbrains.com/python/pycharm-professional-2024.3.1.1.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/python/pycharm-professional-2024.3.2.tar.gz"
 PRODUCT_CODE="PCP"
 BIN_FILE="pycharm.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
