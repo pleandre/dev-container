@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="IntelliJ IDEA Community Edition"
-DOWNLOAD_URL="https://download.jetbrains.com/idea/ideaIC-2024.3.2.1.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/idea/ideaIC-2024.3.2.2.tar.gz"
 PRODUCT_CODE="IIC"
 BIN_FILE="idea.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
