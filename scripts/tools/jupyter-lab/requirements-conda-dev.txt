@@ -40,7 +40,7 @@ attrs==25.1.0
     #   referencing
 autopep8==2.0.4
     # via python-lsp-server
-babel==2.16.0
+babel==2.17.0
     # via jupyterlab-server
 beautifulsoup4==4.12.3
     # via nbconvert
