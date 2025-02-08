@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="Rider"
-DOWNLOAD_URL="https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.4.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/rider/JetBrains.Rider-2024.3.5.tar.gz"
 PRODUCT_CODE="RD"
 BIN_FILE="rider.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
