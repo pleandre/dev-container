@@ -48,9 +48,9 @@ black==25.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach[css]==6.2.0
     # via nbconvert
-boto3==1.36.16
+boto3==1.36.17
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.36.16
+botocore==1.36.17
     # via
     #   boto3
     #   s3transfer
@@ -201,7 +201,7 @@ jupyterlab==4.3.5
     # via
     #   -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
     #   jupyterlab-lsp
-jupyterlab-git==0.50.2
+jupyterlab-git==0.51.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 jupyterlab-lsp==5.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
