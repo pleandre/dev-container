@@ -48,9 +48,9 @@ black==25.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach[css]==6.2.0
     # via nbconvert
-boto3==1.36.24
+boto3==1.36.25
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.36.24
+botocore==1.36.25
     # via
     #   boto3
     #   s3transfer
@@ -318,7 +318,7 @@ prometheus-client==0.21.1
     # via jupyter-server
 prompt-toolkit==3.0.50
     # via ipython
-propcache==0.2.1
+propcache==0.3.0
     # via
     #   aiohttp
     #   yarl
@@ -417,7 +417,7 @@ rich==13.9.4
     # via keras
 rope==1.13.0
     # via python-lsp-server
-rpds-py==0.22.3
+rpds-py==0.23.0
     # via
     #   jsonschema
     #   referencing
