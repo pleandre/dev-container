@@ -48,9 +48,9 @@ black==25.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach[css]==6.2.0
     # via nbconvert
-boto3==1.37.0
+boto3==1.37.1
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.37.0
+botocore==1.37.1
     # via
     #   boto3
     #   s3transfer
