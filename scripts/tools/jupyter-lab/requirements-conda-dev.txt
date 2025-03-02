@@ -87,7 +87,7 @@ docstring-to-markdown==0.15
     # via python-lsp-server
 executing==2.2.0
     # via stack-data
-fastapi==0.115.10
+fastapi==0.115.11
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 fastjsonschema==2.21.1
     # via nbformat
@@ -276,7 +276,7 @@ numpy==2.2.3
     #   pandas
     #   scikit-learn
     #   scipy
-optree==0.14.0
+optree==0.14.1
     # via keras
 overrides==7.7.0
     # via jupyter-server
