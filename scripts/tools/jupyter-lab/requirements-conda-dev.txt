@@ -126,7 +126,7 @@ idna==3.10
     #   yarl
 ipykernel==6.29.5
     # via jupyterlab
-ipython==9.0.1
+ipython==9.0.2
     # via ipykernel
 ipython-pygments-lexers==1.1.1
     # via ipython
@@ -448,7 +448,7 @@ sqlalchemy==2.0.38
     # via jupyter-scheduler
 stack-data==0.6.3
     # via ipython
-starlette==0.46.0
+starlette==0.46.1
     # via fastapi
 terminado==0.18.1
     # via
