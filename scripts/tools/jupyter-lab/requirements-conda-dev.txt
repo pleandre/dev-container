@@ -8,7 +8,7 @@ absl-py==2.1.0
     # via keras
 aiofiles==24.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-aiohappyeyeballs==2.6.0
+aiohappyeyeballs==2.6.1
     # via aiohttp
 aiohttp==3.11.13
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
@@ -33,7 +33,7 @@ asttokens==3.0.0
     # via stack-data
 async-lru==2.0.4
     # via jupyterlab
-attrs==25.1.0
+attrs==25.2.0
     # via
     #   aiohttp
     #   jsonschema
@@ -391,7 +391,7 @@ pytz==2024.2
     #   pandas
 pyyaml==6.0.2
     # via jupyter-events
-pyzmq==26.2.1
+pyzmq==26.3.0
     # via
     #   ipykernel
     #   jupyter-client
