@@ -33,7 +33,7 @@ asttokens==3.0.0
     # via stack-data
 async-lru==2.0.4
     # via jupyterlab
-attrs==25.2.0
+attrs==25.3.0
     # via
     #   aiohttp
     #   jsonschema
@@ -48,9 +48,9 @@ black==25.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach[css]==6.2.0
     # via nbconvert
-boto3==1.37.11
+boto3==1.37.12
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.37.11
+botocore==1.37.12
     # via
     #   boto3
     #   s3transfer
@@ -454,7 +454,7 @@ terminado==0.18.1
     # via
     #   jupyter-server
     #   jupyter-server-terminals
-threadpoolctl==3.5.0
+threadpoolctl==3.6.0
     # via scikit-learn
 tinycss2==1.4.0
     # via bleach
