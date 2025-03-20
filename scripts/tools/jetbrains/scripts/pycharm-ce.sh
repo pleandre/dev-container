@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="PyCharm Community Edition"
-DOWNLOAD_URL="https://download.jetbrains.com/python/pycharm-community-2024.3.4.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/python/pycharm-community-2024.3.5.tar.gz"
 PRODUCT_CODE="PCC"
 BIN_FILE="pycharm.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
