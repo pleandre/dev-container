@@ -87,7 +87,7 @@ docstring-to-markdown==0.15
     # via python-lsp-server
 executing==2.2.0
     # via stack-data
-fastapi==0.115.11
+fastapi==0.115.12
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 fastjsonschema==2.21.1
     # via nbformat
@@ -496,7 +496,7 @@ typing-extensions==4.12.2
     #   pydantic-core
     #   referencing
     #   sqlalchemy
-tzdata==2025.1
+tzdata==2025.2
     # via pandas
 ujson==5.10.0
     # via
