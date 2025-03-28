@@ -48,9 +48,9 @@ black==25.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach[css]==6.2.0
     # via nbconvert
-boto3==1.37.21
+boto3==1.37.22
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.37.21
+botocore==1.37.22
     # via
     #   boto3
     #   s3transfer
@@ -344,11 +344,11 @@ pycodestyle==2.12.1
     #   python-lsp-server
 pycparser==2.22
     # via cffi
-pydantic==2.10.6
+pydantic==2.11.0
     # via
     #   fastapi
     #   jupyter-scheduler
-pydantic-core==2.27.2
+pydantic-core==2.33.0
     # via pydantic
 pydocstyle==6.3.0
     # via python-lsp-server
@@ -446,7 +446,7 @@ snowballstemmer==2.2.0
     # via pydocstyle
 soupsieve==2.6
     # via beautifulsoup4
-sqlalchemy==2.0.39
+sqlalchemy==2.0.40
     # via jupyter-scheduler
 stack-data==0.6.3
     # via ipython
@@ -499,6 +499,9 @@ typing-extensions==4.13.0
     #   pydantic-core
     #   referencing
     #   sqlalchemy
+    #   typing-inspection
+typing-inspection==0.4.0
+    # via pydantic
 tzdata==2025.2
     # via pandas
 ujson==5.10.0
