@@ -10,7 +10,7 @@ aiofiles==24.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 aiohappyeyeballs==2.6.1
     # via aiohttp
-aiohttp==3.11.14
+aiohttp==3.11.12
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 aiosignal==1.3.2
     # via aiohttp
@@ -48,9 +48,9 @@ black==25.1.0
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
 bleach[css]==6.2.0
     # via nbconvert
-boto3==1.37.23
+boto3==1.37.24
     # via -r ./scripts/tools/jupyter-lab/requirements-conda-dev.in
-botocore==1.37.23
+botocore==1.37.24
     # via
     #   boto3
     #   s3transfer
@@ -240,7 +240,7 @@ mistune==3.1.3
     # via nbconvert
 ml-dtypes==0.5.1
     # via keras
-multidict==6.2.0
+multidict==6.3.0
     # via
     #   aiohttp
     #   yarl
