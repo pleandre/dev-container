@@ -278,7 +278,7 @@ numpy==2.2.4
     #   pandas
     #   scikit-learn
     #   scipy
-optree==0.14.1
+optree==0.15.0
     # via keras
 overrides==7.7.0
     # via jupyter-server
@@ -530,7 +530,7 @@ whatthepatch==1.0.7
     # via python-lsp-server
 yapf==0.43.0
     # via python-lsp-server
-yarl==1.18.3
+yarl==1.19.0
     # via aiohttp
 zipp==3.21.0
     # via importlib-metadata
