@@ -307,7 +307,7 @@ pexpect==4.9.0
     # via
     #   ipython
     #   jupyterlab-git
-pillow==11.1.0
+pillow==11.2.1
     # via matplotlib
 platformdirs==4.3.7
     # via
