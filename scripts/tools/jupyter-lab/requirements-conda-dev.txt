@@ -450,7 +450,7 @@ sqlalchemy==2.0.40
     # via jupyter-scheduler
 stack-data==0.6.3
     # via ipython
-starlette==0.46.1
+starlette==0.46.2
     # via fastapi
 terminado==0.18.1
     # via
