@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="RustRover"
-DOWNLOAD_URL="https://download.jetbrains.com/rustrover/RustRover-2024.3.7.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/rustrover/RustRover-2025.1.tar.gz"
 PRODUCT_CODE="RR"
 BIN_FILE="rustrover.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"

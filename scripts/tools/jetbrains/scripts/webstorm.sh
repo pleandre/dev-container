@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="WebStorm"
-DOWNLOAD_URL="https://download.jetbrains.com/webstorm/WebStorm-2024.3.5.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/webstorm/WebStorm-2025.1.tar.gz"
 PRODUCT_CODE="WS"
 BIN_FILE="webstorm.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
