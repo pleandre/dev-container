@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="GoLand"
-DOWNLOAD_URL="https://download.jetbrains.com/go/goland-2025.1.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/go/goland-2025.1.2.tar.gz"
 PRODUCT_CODE="GO"
 BIN_FILE="goland.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
