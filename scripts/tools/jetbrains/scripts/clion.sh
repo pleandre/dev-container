@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="CLion"
-DOWNLOAD_URL="https://download.jetbrains.com/cpp/CLion-2025.1.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/cpp/CLion-2025.1.2.tar.gz"
 PRODUCT_CODE="CL"
 BIN_FILE="clion.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
