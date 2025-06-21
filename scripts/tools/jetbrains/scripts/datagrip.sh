@@ -3,7 +3,7 @@ set -e
 
 # Settings
 NAME="DataGrip"
-DOWNLOAD_URL="https://download.jetbrains.com/datagrip/datagrip-2025.1.tar.gz"
+DOWNLOAD_URL="https://download.jetbrains.com/datagrip/datagrip-2025.1.3.tar.gz"
 PRODUCT_CODE="DG"
 BIN_FILE="datagrip.sh"
 DESTINATION="/opt/jetbrains/${PRODUCT_CODE}/"
